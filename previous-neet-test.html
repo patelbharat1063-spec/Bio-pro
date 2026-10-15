@@ -3,41 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bio Pro — Question Schema Check</title>
-<style>
-body{font:16px system-ui;max-width:900px;margin:20px auto;padding:16px}
-pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f3f4f6;padding:14px;border-radius:8px}
-</style>
+<title>Bio Pro Database Test</title>
 </head>
-<body>
-<h2>Bio Pro — Question Schema Check</h2>
-<p id="status">Loading question sample…</p>
-<pre id="output"></pre>
+<body style="font-family:Arial;padding:20px">
+<h1>Bio Pro Database Test</h1>
+<p id="status">Loading questions...</p>
+<div id="result"></div>
 <script>
-(async()=>{
- const url="https://raw.githubusercontent.com/AbuRaniya/bankofbiology-neet-quiz/main/Bank_of_Biology_NEET_QuizReady_v5_1_PreviousNEET_Separated.json";
- try{
-  const r=await fetch(url);
-  if(!r.ok) throw Error("HTTP "+r.status);
-  const d=await r.json();
-  const q=d.questions;
-  document.getElementById("status").textContent=
-    "Loaded "+(Array.isArray(q)?q.length:0)+" questions.";
-  document.getElementById("output").textContent=JSON.stringify({
-    database_name:d.database_name,
-    version:d.version,
-    total_questions:d.total_questions,
-    chapter_order:d.chapter_order,
-    question_keys:Array.isArray(q)&&q.length?Object.keys(q[0]):[],
-    first_question:Array.isArray(q)?q[0]:null,
-    previous_neet_questions_type:Array.isArray(d.previous_neet_questions)
-      ? "array ("+d.previous_neet_questions.length+")"
-      : typeof d.previous_neet_questions
-  },null,2);
- }catch(e){
-  document.getElementById("status").textContent="Could not load: "+e.message;
- }
-})();
+fetch("https://raw.githubusercontent.com/AbuRaniya/bankofbiology-neet-quiz/main/Bank_of_Biology_NEET_QuizReady_v5_1_PreviousNEET_Separated.json")
+.then(r => {
+ if (!r.ok) throw Error("HTTP " + r.status);
+ return r.json();
+})
+.then(d => {
+ document.getElementById("status").textContent =
+   "Connected successfully!";
+ document.getElementById("result").textContent =
+   "Database: " + d.database_name +
+   " | Total: " + (d.questions || []).length +
+   " | First question fields: " +
+   Object.keys((d.questions || [])[0] || {}).join(", ");
+})
+.catch(e => {
+ document.getElementById("status").textContent =
+   "Error: " + e.message;
+});
 </script>
 </body>
 </html>
