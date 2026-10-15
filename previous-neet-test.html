@@ -8,26 +8,28 @@
 <body style="font-family:Arial;padding:20px">
 <h1>Bio Pro Database Test</h1>
 <p id="status">Loading questions...</p>
-<div id="result"></div>
+<pre id="result"></pre>
 <script>
-fetch("https://raw.githubusercontent.com/AbuRaniya/bankofbiology-neet-quiz/main/Bank_of_Biology_NEET_QuizReady_v5_1_PreviousNEET_Separated.json")
-.then(r => {
- if (!r.ok) throw Error("HTTP " + r.status);
- return r.json();
-})
-.then(d => {
- document.getElementById("status").textContent =
-   "Connected successfully!";
- document.getElementById("result").textContent =
-   "Database: " + d.database_name +
-   " | Total: " + (d.questions || []).length +
-   " | First question fields: " +
-   Object.keys((d.questions || [])[0] || {}).join(", ");
-})
-.catch(e => {
- document.getElementById("status").textContent =
-   "Error: " + e.message;
-});
+(async function(){
+ const status=document.getElementById("status");
+ const result=document.getElementById("result");
+ try {
+  const response=await fetch(
+   "https://raw.githubusercontent.com/AbuRaniya/bankofbiology-neet-quiz/main/Bank_of_Biology_NEET_QuizReady_v5_1_PreviousNEET_Separated.json"
+  );
+  if(!response.ok) throw new Error("HTTP "+response.status);
+  const data=await response.json();
+  const questions=data.questions||[];
+  status.textContent="Database connected successfully!";
+  result.textContent=JSON.stringify({
+   database_name:data.database_name,
+   total_questions:questions.length,
+   first_question:questions[0]||null
+  },null,2);
+ } catch(error) {
+  status.textContent="Loading failed: "+error.message;
+ }
+})();
 </script>
 </body>
 </html>
