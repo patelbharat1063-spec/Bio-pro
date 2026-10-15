@@ -1,1 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NEET-Bot | MCQ Practice</title>
+<style>
+:root {
+  --bg:#f3f6fc; --card:#fff; --text:#17243b;
+  --accent:#315efb; --muted:#65728a; --border:#dce3ef;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0; font-family:Arial,sans-serif;
+  background:var(--bg); color:var(--text);
+}
+header {
+  background:linear-gradient(120deg,#152b59,#315efb);
+  color:white; padding:22px 16px;
+}
+header h1 { margin:0 0 8px; }
+header p { margin:0; }
+main { max-width:1050px; margin:auto; padding:16px; }
+.panel {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:14px; padding:16px; margin-bottom:16px;
+}
+.controls {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:12px;
+}
+label { display:block; font-weight:bold; margin-bottom:6px; }
+select,button {
+  width:100%; padding:12px; border-radius:9px;
+  border:1px solid var(--border); font-size:15px;
+}
+button {
+  background:var(--accent); color:white; border:0;
+  font-weight:bold; cursor:pointer;
+}
+button.secondary { background:#e8edff; color:#2346c4; }
+button:disabled { opacity:.5; cursor:not-allowed; }
+.stats { display:flex; gap:12px; flex-wrap:wrap; }
+.stat { background:#eef2ff; padding:10px 14px; border-radius:10px; }
+.question { font-size:19px; line-height:1.5; font-weight:bold; }
+.option {
+  display:block; padding:12px; margin:9px 0;
+  border:1px solid var(--border); border-radius:9px;
+  cursor:pointer;
+}
+.option input { margin-right:9px; }
+.option.correct { background:#e1f7e9; border-color:#29995a; }
+.option.wrong { background:#ffebeb; border-color:#d94b4b; }
+.feedback { line-height:1.6; margin-top:12px; }
+.muted { color:var(--muted); }
+.actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+@media(max-width:450px) {
+  .actions { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>🧬 NEET-Bot</h1>
+  <p>Biology • Physics • Chemistry | MCQ Practice & CBT</p>
+</header>
 
+<main>
+  <section class="panel">
+    <h2>Choose your paper</h2>
+    <div class="controls">
+      <div>
+        <label for="subject">Subject</label>
+        <select id="subject">
+          <option>Biology</option>
+          <option>Physics</option>
+          <option>Chemistry</option>
+        </select>
+      </div>
+      <div>
+        <label for="chapter">Chapter</label>
+        <select id="chapter"><option value="">All chapters</option></select>
+      </div>
+      <div>
+        <label for="topic">Topic</label>
+        <select id="topic"><option value="">All topics</option></select>
+      </div>
+      <div>
+        <label for="mode">Practice mode</label>
+        <select id="mode">
+          <option value="practice">Practice with explanations</option>
+          <option value="cbt">CBT test mode</option>
+        </select>
+      </div>
+    </div>
+    <div style="margin-top:14px" class="actions">
+      <button id="start">Start / Apply filters</button>
+      <button id="reset" class="secondary">Reset test</button>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="stats">
+      <div class="stat">Question: <b id="progress">0/0</b></div>
+      <div class="stat">Answered: <b id="answered">0</b></div>
+      <div class="stat">Score: <b id="score">0</b></div>
+    </div>
+  </section>
+
+  <section class="panel" id="quiz">
+    <p class="muted">Select a subject and tap Start.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Answer sheet</h2>
+    <p class="muted">Tap a number to revisit a question.</p>
+    <div id="sheet" class="controls"></div>
+    <button id="finish" style="margin-top:14px">Finish test & show results</button>
+    <div id="results" class="feedback"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Load a question dataset</h2>
+    <p class="muted">
+      Import a JSON file containing your legally usable MCQs.
+      The imported questions stay in this browser session.
+    </p>
+    <input id="file" type="file" accept=".json,application/json"
+      style="width:100%;padding:10px">
+    <p id="importStatus" class="feedback"></p>
+    <button id="export" class="secondary">Export filtered questions as JSON</button>
+  </section>
+</main>
+
+<script>
+"use strict";
+
+/* Demonstration questions only.
+   Import your own verified dataset using the JSON loader below. */
+const demo = [
+  {
+    id:"BIO001", subject:"Biology",
+    chapter:"Cell: The Unit of Life", topic:"Cell Theory",
+    question:"Who proposed the cell theory?",
+    options:[
+      "Schleiden and Schwann",
+      "Watson and Crick",
+      "Darwin and Wallace",
+      "Mendel and Morgan"
+    ],
+    answer:0,
+    explanation:"Schleiden and Schwann proposed the cell theory."
+  },
+  {
+    id:"BIO002", subject:"Biology",
+    chapter:"Cell: The Unit of Life", topic:"Cell Organelles",
+    question:"Which organelle is the main site of aerobic ATP production?",
+    options:["Golgi apparatus","Mitochondrion","Lysosome","Ribosome"],
+    answer:1,
+    explanation:"Mitochondria carry out most aerobic cellular respiration."
+  },
+  {
+    id:"PHY001", subject:"Physics",
+    chapter:"Laws of Motion", topic:"Newton's Laws",
+    question:"The SI unit of force is:",
+    options:["Joule","Watt","Newton","Pascal"],
+    answer:2,
+    explanation:"Force is measured in newtons (N)."
+  },
+  {
+    id:"CHE001", subject:"Chemistry",
+    chapter:"Atomic Structure", topic:"Atomic Number",
+    question:"The atomic number of an element equals its number of:",
+    options:["Neutrons","Protons","Nucleons","Isotopes"],
+    answer:1,
+    explanation:"Atomic number is defined by the number of protons."
+  }
+];
+
+let database = [...demo];
+let questions = [];
+let index = 0;
+let responses = {};
+let submitted = false;
+
+const $ = id => document.getElementById(id);
+const subject = $("subject");
+const chapter = $("chapter");
+const topic = $("topic");
+
+function filteredDatabase() {
+  return database.filter(q =>
+    q.subject === subject.value &&
+    (!chapter.value || q.chapter === chapter.value) &&
+    (!topic.value || q.topic === topic.value)
+  );
+}
+
+function updateChapters() {
+  const old = chapter.value;
+  const values = [...new Set(database
+    .filter(q => q.subject === subject.value)
+    .map(q => q.chapter))].sort();
+
+  chapter.innerHTML = '<option value="">All chapters</option>';
+  values.forEach(v => chapter.add(new Option(v, v)));
+  if (values.includes(old)) chapter.value = old;
+  updateTopics();
+}
+
+function updateTopics() {
+  const old = topic.value;
+  const values = [...new Set(database.filter(q =>
+    q.subject === subject.value &&
+    (!chapter.value || q.chapter === chapter.value)
+  ).map(q => q.topic))].sort();
+
+  topic.innerHTML = '<option value="">All topics</option>';
+  values.forEach(v => topic.add(new Option(v, v)));
+  if (values.includes(old)) topic.value = old;
+}
+
+function startTest() {
+  questions = filteredDatabase();
+  index = 0;
+  responses = {};
+  submitted = false;
+  $("results").textContent = "";
+  renderSheet();
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = questions[index];
+  if (!q) {
+    $("quiz").innerHTML =
+      '<p>No questions found. Import a dataset or change filters.</p>';
+    $("progress").textContent = "0/0";
+    $("answered").textContent = "0";
+    $("score").textContent = "0";
+    return;
+  }
+
+  $("progress").textContent = `${index+1}/${questions.length}`;
+  $("answered").textContent = Object.keys(responses).length;
+  $("score").textContent = currentScore();
+
+  const practice = $("mode").value === "practice";
+  const chosen = responses[q.id];
+  let html = `<p class="muted">${escapeHtml(q.subject)} ·
+    ${escapeHtml(q.chapter)} · ${escapeHtml(q.topic)}</p>
+    <div class="question">${index+1}. ${escapeHtml(q.question)}</div>
+    <div id="options">`;
+
+  q.options.forEach((option, i) => {
+    let cls = "option";
+    if (practice && chosen !== undefined && i === q.answer)
+      cls += " correct";
+    else if (practice && chosen === i && i !== q.answer)
+      cls += " wrong";
+
+    html += `<label class="${cls}">
+      <input type="radio" name="answer" value="${i}"
+        ${chosen === i ? "checked" : ""}
+        ${submitted ? "disabled" : ""}>
+      ${String.fromCharCode(65+i)}. ${escapeHtml(option)}
+    </label>`;
+  });
+
+  html += `</div><div class="feedback" id="feedback"></div>
+    <div class="actions" style="margin-top:14px">
+      <button id="prev" class="secondary">Previous</button>
+      <button id="next">Next</button>
+    </div>`;
+  $("quiz").innerHTML = html;
+
+  $("quiz").querySelectorAll('input[name="answer"]').forEach(el => {
+    el.addEventListener("change", () => {
+      if (submitted) return;
+      responses[q.id] = Number(el.value);
+      $("answered").textContent = Object.keys(responses).length;
+      $("score").textContent = currentScore();
+      renderSheet();
+
+      if (practice) {
+        const correct = responses[q.id] === q.answer;
+        $("feedback").textContent =
+          (correct ? "Correct! " : "Not quite. ") + q.explanation;
+      }
+    });
+  });
+
+  if (practice && chosen !== undefined) {
+    $("feedback").textContent =
+      (chosen === q.answer ? "Correct! " : "Incorrect. ") + q.explanation;
+  }
+
+  $("prev").disabled = index === 0;
+  $("next").textContent =
+    index === questions.length-1 ? "Last question" : "Next question";
+  $("prev").onclick = () => { if(index>0){index--;renderQuestion();} };
+  $("next").onclick = () => {
+    if(index < questions.length-1){index++;renderQuestion();}
+  };
+}
+
+function currentScore() {
+  return questions.filter(q => responses[q.id] === q.answer).length;
+}
+
+function renderSheet() {
+  $("sheet").innerHTML = "";
+  questions.forEach((q, i) => {
+    const b = document.createElement("button");
+    b.textContent = String(i+1) + (responses[q.id] !== undefined ? " ✓" : "");
+    b.className = "secondary";
+    b.onclick = () => { index = i; renderQuestion(); };
+    $("sheet").appendChild(b);
+  });
+}
+
+function finishTest() {
+  if (!questions.length) return;
+  submitted = true;
+  const total = questions.length;
+  const attempted = Object.keys(responses).length;
+  const score = currentScore();
+  $("results").innerHTML =
+    `<h3>Test results</h3>
+     <p>Score: <b>${score}/${total}</b></p>
+     <p>Attempted: ${attempted} · Unanswered: ${total-attempted}</p>
+     <p>Accuracy of attempted answers: ${
+       attempted ? Math.round(score/attempted*100) : 0
+     }%</p>`;
+  renderQuestion();
+}
+
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;",
+    '"':"&quot;", "'":"&#39;"
+  })[c]);
+}
+
+subject.addEventListener("change", updateChapters);
+chapter.addEventListener("change", updateTopics);
+$("start").onclick = startTest;
+$("reset").onclick = startTest;
+$("finish").onclick = finishTest;
+
+$("file").addEventListener("change", async event => {
+  const file = event.target.files[0];
+  if (!file) return;
+  try {
+    const data = JSON.parse(await file.text());
+    if (!Array.isArray(data) || !data.every(q =>
+      q && ["Biology","Physics","Chemistry"].includes(q.subject) &&
+      typeof q.chapter === "string" &&
+      typeof q.topic === "string" &&
+      typeof q.question === "string" &&
+      Array.isArray(q.options) && q.options.length === 4 &&
+      Number.isInteger(q.answer) && q.answer >= 0 && q.answer < 4 &&
+      typeof q.explanation === "string"
+    )) throw new Error("Dataset format is invalid.");
+
+    database = data.map((q,i) => ({
+      ...q, id:String(q.id || "Q"+(i+1))
+    }));
+    updateChapters();
+    startTest();
+    $("importStatus").textContent =
+      `Loaded ${database.length} questions successfully.`;
+  } catch (err) {
+    $("importStatus").textContent =
+      "Import failed: " + err.message;
+  }
+});
+
+$("export").onclick = () => {
+  const data = filteredDatabase();
+  const blob = new Blob([JSON.stringify(data,null,2)], {
+    type:"application/json"
+  });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "neet-mcqs.json";
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+};
+
+updateChapters();
+startTest();
+</script>
+</body>
+</html>
