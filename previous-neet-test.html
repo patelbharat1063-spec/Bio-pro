@@ -1,106 +1,43 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Bio Pro — Previous NEET Test</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bio Pro — Question Schema Check</title>
 <style>
-body{font:16px system-ui;background:#f2f6fa;color:#17324d;margin:0}
-header{background:linear-gradient(120deg,#4f46e5,#087e8b);color:white;padding:20px}
-main{max-width:850px;margin:auto;padding:14px}
-.card{background:white;border:1px solid #d8e1e9;border-radius:12px;padding:15px;margin:12px 0;overflow-wrap:anywhere}
-button{background:#087e8b;color:white;border:0;border-radius:8px;padding:12px;font-weight:bold}
-pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f4f7f9;padding:10px;font-size:12px}
+body{font:16px system-ui;max-width:900px;margin:20px auto;padding:16px}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f3f4f6;padding:14px;border-radius:8px}
 </style>
 </head>
 <body>
-<header>
-<h1>NEET Bio Pro</h1>
-<p>Previous NEET Biology Question Database</p>
-<small>Created by Bharat Patel</small>
-</header>
-<main>
-<div class="card">
-<h2>Database connection test</h2>
-<p>This test does not modify your main Bio Pro page.</p>
-<button onclick="loadDB()">Load Previous NEET Questions</button>
-<p id="status">Ready to test.</p>
-</div>
-<div class="card">
-<h2>Database details</h2>
-<div id="details">Waiting for connection…</div>
-</div>
-<div class="card">
-<h2>Question sample</h2>
-<div id="sample">No questions loaded yet.</div>
-</div>
-</main>
+<h2>Bio Pro — Question Schema Check</h2>
+<p id="status">Loading question sample…</p>
+<pre id="output"></pre>
 <script>
-const DB_URL =
-"https://raw.githubusercontent.com/AbuRaniya/bankofbiology-neet-quiz/main/Bank_of_Biology_NEET_QuizReady_v5_1_PreviousNEET_Separated.json";
-
-function findArrays(value,path,out,depth=0){
-  if(!value || depth>8) return;
-  if(Array.isArray(value)){
-    const objects=value.filter(x=>x&&typeof x==="object"&&!Array.isArray(x));
-    const examples=objects.filter(x=>{
-      const keys=Object.keys(x).join(" ").toLowerCase();
-      return /question|question_text|questiontext|stem/.test(keys);
-    });
-    if(examples.length) out.push({path,count:examples.length,items:examples.slice(0,3)});
-    value.slice(0,30).forEach((x,i)=>{
-      if(x&&typeof x==="object") findArrays(x,path+"["+i+"]",out,depth+1);
-    });
-  }else if(typeof value==="object"){
-    Object.entries(value).forEach(([k,v])=>{
-      if(v&&typeof v==="object") findArrays(v,path+"."+k,out,depth+1);
-    });
-  }
-}
-
-async function loadDB(){
- const status=document.getElementById("status");
- const details=document.getElementById("details");
- const sample=document.getElementById("sample");
- status.textContent="Downloading database…";
- details.textContent="Please wait…";
- sample.textContent="";
+(async()=>{
+ const url="https://raw.githubusercontent.com/AbuRaniya/bankofbiology-neet-quiz/main/Bank_of_Biology_NEET_QuizReady_v5_1_PreviousNEET_Separated.json";
  try{
-   const response=await fetch(DB_URL,{cache:"no-store"});
-   if(!response.ok) throw Error("HTTP "+response.status);
-   const raw=await response.text();
-   const data=JSON.parse(raw);
-   const found=[];
-   findArrays(data,"root",found);
-   status.textContent="Download and JSON parsing succeeded. Characters: "+raw.length.toLocaleString();
-   details.innerHTML="";
-   const top=document.createElement("pre");
-   top.textContent="Top-level structure:\n"+
-     (Array.isArray(data)?"Array length: "+data.length:
-     typeof data==="object"&&data!==null?
-     Object.keys(data).join(", "):typeof data)+
-     "\n\nPossible question arrays:\n"+
-     (found.map(x=>x.path+" — "+x.count+" detected questions").join("\n")||"No recognizable question arrays found.");
-   details.appendChild(top);
-   if(!found.length){
-     sample.textContent="No question array recognized. We need to inspect the JSON format before integration.";
-     return;
-   }
-   found.slice(0,5).forEach(group=>{
-     const h=document.createElement("h3");
-     h.textContent=group.path+" — sample";
-     sample.appendChild(h);
-     const pre=document.createElement("pre");
-     pre.textContent=JSON.stringify(group.items,null,2).slice(0,5000);
-     sample.appendChild(pre);
-   });
- }catch(error){
-   status.textContent="Database test failed: "+error.message;
-   details.textContent="Check internet access, source availability, and JSON format.";
-   sample.textContent="No questions could be displayed.";
+  const r=await fetch(url);
+  if(!r.ok) throw Error("HTTP "+r.status);
+  const d=await r.json();
+  const q=d.questions;
+  document.getElementById("status").textContent=
+    "Loaded "+(Array.isArray(q)?q.length:0)+" questions.";
+  document.getElementById("output").textContent=JSON.stringify({
+    database_name:d.database_name,
+    version:d.version,
+    total_questions:d.total_questions,
+    chapter_order:d.chapter_order,
+    question_keys:Array.isArray(q)&&q.length?Object.keys(q[0]):[],
+    first_question:Array.isArray(q)?q[0]:null,
+    previous_neet_questions_type:Array.isArray(d.previous_neet_questions)
+      ? "array ("+d.previous_neet_questions.length+")"
+      : typeof d.previous_neet_questions
+  },null,2);
+ }catch(e){
+  document.getElementById("status").textContent="Could not load: "+e.message;
  }
-}
+})();
 </script>
 </body>
 </html>
-
