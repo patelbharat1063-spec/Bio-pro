@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NEET Pro — Complete Question Bank</title>
+<style>
+:root{
+ --bg:#0b1220;--panel:#141f33;--panel2:#1d2b43;
+ --text:#f2f6ff;--muted:#aab8cf;--accent:#45e0b2;
+ --border:#354761;--red:#ff647c;--yellow:#ffd166;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+ font-family:Arial,sans-serif;line-height:1.5}
+header{padding:20px;background:#080e19;border-bottom:2px solid var(--accent)}
+header h1{margin:0;font-size:25px}
+header p{margin:5px 0;color:var(--muted)}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+button,.btn{border:0;border-radius:8px;padding:10px 14px;
+ background:var(--accent);color:#071d19;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.4;cursor:not-allowed}
+.secondary{background:#354761;color:white}
+.danger{background:#a8374b;color:white}
+nav button.active{outline:2px solid white}
+main{max-width:1200px;margin:auto;padding:15px}
+.panel{background:var(--panel);padding:16px;border-radius:12px;
+ margin-bottom:14px;border:1px solid var(--border)}
+h2{font-size:19px;margin-top:0}
+h3{font-size:16px}
+label{display:block;color:var(--muted);font-size:13px;margin-bottom:4px}
+input,select,textarea{width:100%;padding:10px;background:#0b1425;
+ color:white;border:1px solid var(--border);border-radius:7px;margin-bottom:10px}
+input[type=checkbox],input[type=radio]{width:auto;margin:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.actions{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}
+.small{font-size:13px;color:var(--muted)}
+#status{white-space:pre-wrap;color:var(--yellow);font-size:13px}
+.metric{padding:12px;background:var(--panel2);border-radius:9px}
+.metric strong{display:block;font-size:22px;color:var(--accent)}
+#questionText{font-size:18px;white-space:pre-wrap}
+.option{display:flex;align-items:flex-start;gap:10px;text-align:left;
+ width:100%;background:var(--panel2);color:var(--text);
+ border:1px solid var(--border);margin:7px 0}
+.option.selected{border:2px solid var(--accent)}
+.option.correct{background:#145a44}
+.option.wrong{background:#713444}
+.hidden{display:none!important}
+.question-card{padding:14px;border:1px solid var(--border);
+ border-radius:9px;margin:10px 0;break-inside:avoid}
+.paper-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.paper-question{break-inside:avoid;margin:0 0 18px}
+.omr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:8px}
+.omr-item{background:var(--panel2);padding:9px;border-radius:8px}
+.bubble{display:inline-flex;border:1px solid var(--muted);
+ border-radius:50%;width:25px;height:25px;align-items:center;
+ justify-content:center;margin:2px;font-size:12px}
+.bubble.filled{background:var(--accent);color:#061c17;border-color:var(--accent)}
+hr{border:0;border-top:1px solid var(--border);margin:16px 0}
+table{width:100%;border-collapse:collapse;font-size:13px}
+td,th{padding:8px;border-bottom:1px solid var(--border);text-align:left}
+#timer{font-size:22px;font-weight:bold;color:var(--yellow)}
+@media(max-width:650px){.paper-grid{grid-template-columns:1fr}header h1{font-size:21px}}
+@media print{
+ body{background:white;color:black;font-size:10pt}
+ header,nav,.no-print,#setup,#status{display:none!important}
+ main{padding:0;max-width:none}
+ .panel,.question-card{background:white;color:black;border:0;padding:4px}
+ .paper-grid{grid-template-columns:1fr 1fr;gap:15px}
+ .option{background:white;color:black;border:0;padding:3px}
+ .small{color:#333}
+ .paper-question{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header>
+<h1>🧬 NEET PRO</h1>
+<p>Biology • Physics • Chemistry | Question Bank • CBT • Analysis</p>
+<nav class="no-print">
+<button class="active" data-view="practice">Practice</button>
+<button data-view="paper">Paper Builder</button>
+<button data-view="omr">OMR Sheet</button>
+<button data-view="analysis">Error Analysis</button>
+<button data-view="admin">Import / Export</button>
+</nav>
+</header>
+
+<main>
+<section id="setup" class="panel no-print">
+<h2>Question Bank & Test Setup</h2>
+<div class="grid">
+<div><label>Subject</label>
+<select id="subject">
+<option value="biology">Biology</option>
+<option value="physics">Physics</option>
+<option value="chemistry">Chemistry</option>
+<option value="all">All subjects</option>
+</select></div>
+<div><label>Chapter</label>
+<select id="chapter"><option value="">Load chapter list first</option></select></div>
+<div><label>Topic</label>
+<select id="topic"><option value="">All topics</option></select></div>
+<div><label>Mode</label>
+<select id="mode"><option value="practice">Practice</option>
+<option value="cbt">CBT Mock Test</option></select></div>
+<div><label>Questions in test (0 = all)</label>
+<input id="limit" type="number" min="0" value="45"></div>
+<div><label>Test duration (minutes)</label>
+<input id="duration" type="number" min="1" value="60"></div>
+<div><label>Correct answer marks</label>
+<input id="positive" type="number" value="4"></div>
+<div><label>Wrong answer marks</label>
+<input id="negative" type="number" value="-1"></div>
+</div>
+<div class="actions">
+<button id="loadChapters">Load Chapters</button>
+<button id="loadQuestions">Fetch Questions</button>
+<button id="startTest">Start / Reset Test</button>
+<button id="shuffle" class="secondary">Shuffle Questions</button>
+</div>
+<div id="status">Ready. Connect to the public GitHub question bank.</div>
+<p class="small">Requires internet. Questions are downloaded one chapter at a time. Source data may contain incomplete or incorrect answers; verify before formal examination use.</p>
+</section>
+
+<section id="view-practice" class="view">
+<div class="grid panel">
+<div class="metric"><span class="small">Loaded questions</span><strong id="total">0</strong></div>
+<div class="metric"><span class="small">Attempted</span><strong id="attempted">0</strong></div>
+<div class="metric"><span class="small">Correct</span><strong id="correct">0</strong></div>
+<div class="metric"><span class="small">Score</span><strong id="score">0</strong></div>
+</div>
+<div class="panel">
+<div class="grid">
+<div><b id="progress">Question 0 / 0</b></div>
+<div><span id="timer">--:--</span></div>
+</div>
+<hr>
+<div id="questionText">Choose a subject and load a chapter.</div>
+<div id="options"></div>
+<div id="explanation" class="small"></div>
+<div class="actions no-print">
+<button id="previous" class="secondary">← Previous</button>
+<button id="checkAnswer">Check Answer</button>
+<button id="bookmark" class="secondary">☆ Bookmark</button>
+<button id="next">Next →</button>
+<button id="finish" class="danger">Finish Test</button>
+</div>
+<div id="results"></div>
+</div>
+</section>
+
+<section id="view-paper" class="view hidden">
+<div class="panel no-print">
+<h2>Paper Builder</h2>
+<p class="small">Build a printable question paper from the questions currently loaded.</p>
+<div class="actions">
+<button id="buildPaper">Generate Double-Column Paper</button>
+<button id="printPaper">Print / Save PDF</button>
+<button id="paperKey" class="secondary">Show Answer Key</button>
+</div>
+</div>
+<div id="paperOutput" class="panel"></div>
+</section>
+
+<section id="view-omr" class="view hidden">
+<div class="panel">
+<h2>OMR-Style Answer Sheet</h2>
+<p class="small">Select an answer bubble to record your response. This is a digital practice sheet, not an official NEET OMR form.</p>
+<div id="omrOutput" class="omr-grid"></div>
+<div class="actions no-print">
+<button id="omrSubmit">Submit OMR Answers</button>
+<button id="printOMR" class="secondary">Print OMR Sheet</button>
+</div>
+</div>
+</section>
+
+<section id="view-analysis" class="view hidden">
+<div class="panel">
+<h2>Performance & Error Analysis</h2>
+<div id="analysisOutput">Complete a test to see your analysis.</div>
+<div class="actions no-print">
+<button id="exportAnalysis">Export Analysis JSON</button>
+</div>
+</div>
+</section>
+
+<section id="view-admin" class="view hidden">
+<div class="panel">
+<h2>Import / Export Question Bank</h2>
+<p class="small">Import a JSON file with a questions array. Export the currently loaded questions for backup.</p>
+<label>Import JSON file</label>
+<input type="file" id="importFile" accept=".json,application/json">
+<div class="actions">
+<button id="importButton">Import Questions</button>
+<button id="exportQuestions" class="secondary">Export Questions JSON</button>
+<button id="exportAnswers" class="secondary">Export Answer Key</button>
+</div>
+<hr>
+<h3>Data source</h3>
+<p><a style="color:var(--accent)" href="https://github.com/neural-arun/neet-bot" target="_blank" rel="noopener">neural-arun/neet-bot on GitHub</a></p>
+<p class="small">This frontend does not create secure student accounts or a shared database. Imported records stay in the current page session unless exported.</p>
+</div>
+</section>
+</main>
+
+<script>
+"use strict";
+
+const API="https://api.github.com/repos/neural-arun/neet-bot/contents/neet_pyq";
+const RAW="https://raw.githubusercontent.com/neural-arun/neet-bot/master/neet_pyq";
+const $=id=>document.getElementById(id);
+
+let bank=[],test=[],index=0,answers={},checked={},bookmarks={};
+let seconds=0,timerId=null,finished=false,showKey=false;
+let paperQuestions=[];
+
+async function getJSON(url){
+ const r=await fetch(url);
+ if(!r.ok)throw Error("HTTP "+r.status+" — "+url);
+ return r.json();
+}
+function status(s){$("status").textContent=s;}
+function esc(s){
+ return String(s??"").replace(/[&<>"']/g,c=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[c]));
+}
+function subjectTitle(s){
+ return ({biology:"Biology",physics:"Physics",chemistry:"Chemistry"})[s]||s;
+}
+function pretty(s){
+ return String(s||"").replace(/\.json$/i,"").replace(/[_-]+/g," ")
+ .replace(/\b\w/g,c=>c.toUpperCase());
+}
+function selectedSubject(){
+ return $("subject").value;
+}
+function setOptions(select,items,firstLabel){
+ select.innerHTML="";
+ select.add(new Option(firstLabel,""));
+ items.forEach(x=>select.add(new Option(x.label,x.value)));
+}
+async function loadChapters(){
+ const s=selectedSubject();
+ $("chapter").innerHTML="";
+ $("topic").innerHTML='<option value="">All topics</option>';
+ status("Fetching chapter list from GitHub…");
+ try{
+  let subs=s==="all"?["biology","physics","chemistry"]:[s];
+  let list=[];
+  for(const sub of subs){
+   const files=await getJSON(API+"/"+sub+"?ref=master");
+   files.filter(f=>f.type==="file"&&f.name.endsWith(".json"))
+    .forEach(f=>list.push({label:subjectTitle(sub)+" — "+pretty(f.name),
+      value:sub+"|"+f.name}));
+  }
+  list.sort((a,b)=>a.label.localeCompare(b.label));
+  setOptions($("chapter"),list,"Select a chapter");
+  status("Found "+list.length+" chapter files.");
+ }catch(e){
+  status("Could not load chapters: "+e.message+
+   "\nCheck internet access, GitHub availability, or source repository branch.");
+ }
+}
+function answerIndex(q,opts){
+ let a=String(q.answer??q.correct_answer??q.correct??"").trim();
+ if(/^[A-D]$/i.test(a))return a.toUpperCase().charCodeAt(0)-65;
+ if(/^[1-4]$/.test(a))return Number(a)-1;
+ if(Array.isArray(opts))return opts.findIndex(o=>String(o)===a);
+ return -1;
+}
+function normalize(q,i,sub,chapter){
+ let raw=q.options??q.choices??q.answers??{};
+ let opts=Array.isArray(raw)?raw.map(o=>typeof o==="string"?o:(o.text||o.option||"")):
+ ["A","B","C","D"].map(k=>raw[k]??raw[k.toLowerCase()]??"");
+ return {
+ id:sub+"-"+chapter+"-"+i,
+ subject:q.subject||sub,
+ chapter:q.chapter||pretty(chapter),
+ topic:q.topic||q.topic_name||q.subtopic||"",
+ question:q.question||q.question_text||q.q||"",
+ options:opts,
+ answerIndex:answerIndex(q,opts),
+ explanation:q.solution||q.explanation||q.detailed_solution||"",
+ exam:q.exam||"",year:q.year||""
+ };
+}
+async function fetchChapter(value){
+ const [sub,file]=value.split("|");
+ status("Downloading "+pretty(file)+" …");
+ const data=await getJSON(RAW+"/"+sub+"/"+encodeURIComponent(file));
+ const arr=Array.isArray(data)?data:(data.questions||data.data||[]);
+ return arr.map((q,i)=>normalize(q,i,sub,file))
+ .filter(q=>q.question&&q.options.some(Boolean));
+}
+function updateTopics(){
+ let topics=[...new Set(bank.map(q=>q.topic).filter(Boolean))].sort();
+ setOptions($("topic"),topics.map(t=>({label:t,value:t})),"All topics");
+}
+async function loadQuestions(){
+ const value=$("chapter").value;
+ if(!value){status("Select a chapter first.");return;}
+ try{
+  bank=await fetchChapter(value);
+  updateTopics();
+  test=[];answers={};checked={};index=0;finished=false;
+  render();
+  status("Loaded "+bank.length+" questions. Select a topic if required, then start the test.");
+ }catch(e){status("Question download failed: "+e.message);}
+}
+function filteredBank(){
+ const topic=$("topic").value;
+ return bank.filter(q=>!topic||q.topic===topic);
+}
+function startTest(){
+ const pool=filteredBank();
+ if(!pool.length){status("No questions available. Load a chapter first.");return;}
+ let limit=Number($("limit").value)||0;
+ test=pool.slice();
+ if(limit>0)test=test.slice(0,limit);
+ answers={};checked={};bookmarks={};index=0;finished=false;
+ showKey=false;
+ if($("mode").value==="cbt"){
+  seconds=Math.max(1,Number($("duration").value)||60)*60;
+  clearInterval(timerId);
+  timerId=setInterval(tick,1000);
+ }else{clearInterval(timerId);timerId=null;seconds=0;}
+ $("results").innerHTML="";
+ render();renderOMR();
+ status("Test started: "+test.length+" questions.");
+}
+function shuffleTest(){
+ let pool=filteredBank().slice();
+ for(let i=pool.length-1;i>0;i--){
+  let j=Math.floor(Math.random()*(i+1));
+  [pool[i],pool[j]]=[pool[j],pool[i]];
+ }
+ let limit=Number($("limit").value)||0;
+ test=limit>0?pool.slice(0,limit):pool;
+ answers={};checked={};index=0;finished=false;
+ render();renderOMR();
+ status("Shuffled "+test.length+" questions.");
+}
+function tick(){
+ if(finished)return;
+ seconds--;
+ $("timer").textContent=clock(seconds);
+ if(seconds<=0){clearInterval(timerId);finishTest(true);}
+}
+function clock(s){return String(Math.floor(Math.max(0,s)/60)).padStart(2,"0")+":"+
+ String(Math.max(0,s)%60).padStart(2,"0");}
+function score(){
+ let correct=0,wrong=0,attempted=0,marks=0;
+ test.forEach((q,i)=>{
+  if(answers[i]===undefined)return;
+  attempted++;
+  if(q.answerIndex>=0&&answers[i]===q.answerIndex){
+   correct++;marks+=Number($("positive").value)||4;
+  }else if(q.answerIndex>=0){
+   wrong++;marks+=Number($("negative").value)||-1;
+  }
+ });
+ return {correct,wrong,attempted,marks,unanswered:test.length-attempted};
+}
+function render(){
+ $("total").textContent=test.length;
+ const sc=score();
+ $("attempted").textContent=sc.attempted;
+ $("correct").textContent=sc.correct;
+ $("score").textContent=sc.marks;
+ $("progress").textContent=test.length?"Question "+(index+1)+" / "+test.length:"Question 0 / 0";
+ $("options").innerHTML="";$("explanation").textContent="";
+ if(!test.length){$("questionText").textContent="Load a chapter and start a test.";return;}
+ const q=test[index];
+ $("questionText").textContent=(q.subject?subjectTitle(q.subject)+" · ":"")+
+ (q.chapter||"")+" \n"+q.question;
+ q.options.forEach((opt,i)=>{
+  if(!opt)return;
+  const b=document.createElement("button");
+  b.className="option"+(answers[index]===i?" selected":"");
+  b.textContent=String.fromCharCode(65+i)+". "+opt;
+  if(checked[index]||finished){
+   if(i===q.answerIndex)b.classList.add("correct");
+   else if(answers[index]===i)b.classList.add("wrong");
+  }
+  b.onclick=()=>{
+   if(finished)return;
+   answers[index]=i;
+   if($("mode").value==="practice")checked[index]=false;
+   render();renderOMR();
+  };
+  $("options").appendChild(b);
+ });
+ if(checked[index]||finished){
+  $("explanation").textContent="Correct answer: "+
+   (q.answerIndex>=0?String.fromCharCode(65+q.answerIndex):"Not supplied")+
+   (q.explanation?"\nExplanation: "+q.explanation:"");
+ }
+ $("bookmark").textContent=bookmarks[index]?"★ Bookmarked":"☆ Bookmark";
+}
+function checkAnswer(){
+ if(!test.length)return;
+ checked[index]=true;render();
+}
+function nextQuestion(){
+ if(index<test.length-1){index++;render();}
+}
+function previousQuestion(){
+ if(index>0){index--;render();}
+}
+function finishTest(auto=false){
+ if(!test.length)return;
+ finished=true;clearInterval(timerId);timerId=null;
+ test.forEach((q,i)=>checked[i]=true);
+ render();renderOMR();showResults();
+ status(auto?"Time is up. Test submitted.":"Test submitted.");
+}
+function showResults(){
+ const s=score();
+ const pct=s.attempted?Math.round(s.correct/s.attempted*100):0;
+ $("results").innerHTML=`<hr><h3>Test Result</h3>
+ <p>Correct: <b>${s.correct}</b> · Wrong: <b>${s.wrong}</b> ·
+ Unanswered: <b>${s.unanswered}</b></p>
+ <p>Total marks: <b>${s.marks}</b> · Accuracy: <b>${pct}%</b></p>
+ <button class="secondary no-print" onclick="showAnalysis()">Open Error Analysis</button>`;
+}
+function showAnalysis(){
+ $("analysisOutput").innerHTML="";
+ const s=score();
+ const p=document.createElement("p");
+ p.textContent=`Attempted ${s.attempted}/${test.length}; correct ${s.correct}; wrong ${s.wrong}; unanswered ${s.unanswered}; score ${s.marks}.`;
+ $("analysisOutput").appendChild(p);
+ const table=document.createElement("table");
+ table.innerHTML="<tr><th>#</th><th>Chapter</th><th>Question</th><th>Your answer</th><th>Correct</th><th>Status</th></tr>";
+ test.forEach((q,i)=>{
+  let state=answers[i]===undefined?"Unanswered":
+   q.answerIndex<0?"Answer unavailable":
+   answers[i]===q.answerIndex?"Correct":"Wrong";
+  let tr=document.createElement("tr");
+  const vals=[i+1,q.chapter,q.question,
+   answers[i]===undefined?"—":String.fromCharCode(65+answers[i]),
+   q.answerIndex<0?"—":String.fromCharCode(65+q.answerIndex),state];
+  vals.forEach(v=>{let td=document.createElement("td");td.textContent=v;tr.appendChild(td);});
+  table.appendChild(tr);
+ });
+ $("analysisOutput").appendChild(table);
+}
+function renderOMR(){
+ $("omrOutput").innerHTML="";
+ test.forEach((q,i)=>{
+  const item=document.createElement("div");item.className="omr-item";
+  const title=document.createElement("div");title.textContent="Q"+(i+1);
+  item.appendChild(title);
+  ["A","B","C","D"].forEach((letter,j)=>{
+   const b=document.createElement("button");
+   b.className="bubble"+(answers[i]===j?" filled":"");
+   b.textContent=letter;b.title="Question "+(i+1)+", option "+letter;
+   b.onclick=()=>{if(!finished){answers[i]=j;renderOMR();render();}};
+   item.appendChild(b);
+  });
+  $("omrOutput").appendChild(item);
+ });
+}
+function makePaper(){
+ paperQuestions=test.length?test:filteredBank();
+ if(!paperQuestions.length){$("paperOutput").textContent="Load questions first.";return;}
+ $("paperOutput").innerHTML="<h2>NEET Practice Paper</h2>"+
+ "<p>Subject: "+esc($("subject").value)+" | Questions: "+paperQuestions.length+"</p>"+
+ '<div class="paper-grid" id="paperGrid"></div>';
+ const grid=$("paperGrid");
+ paperQuestions.forEach((q,i)=>{
+  const div=document.createElement("div");div.className="paper-question";
+  let html=`<b>Q${i+1}.</b> ${esc(q.question)}<br>`;
+  q.options.forEach((o,j)=>{if(o)html+=`<div>${"ABCD"[j]}. ${esc(o)}</div>`;});
+  div.innerHTML=html;grid.appendChild(div);
+ });
+}
+function showAnswerKey(){
+ const qs=paperQuestions.length?paperQuestions:(test.length?test:filteredBank());
+ if(!qs.length)return;
+ const key=document.createElement("div");
+ key.innerHTML="<hr><h3>Answer Key & Explanations</h3>";
+ qs.forEach((q,i)=>{
+  const p=document.createElement("p");
+  p.textContent=`Q${i+1}: ${q.answerIndex<0?"Answer not supplied":"ABCD"[q.answerIndex]}${q.explanation?" — "+q.explanation:""}`;
+  key.appendChild(p);
+ });
+ $("paperOutput").appendChild(key);
+}
+function download(filename,content,type="application/json"){
+ const blob=new Blob([content],{type});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");a.href=url;a.download=filename;a.click();
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function exportQuestionBank(){
+ download("neet-question-bank.json",JSON.stringify({questions:bank},null,2));
+}
+function exportAnswerKey(){
+ download("neet-answer-key.json",JSON.stringify(test.map((q,i)=>({
+ question:q.question,chapter:q.chapter,subject:q.subject,
+ yourAnswer:answers[i]===undefi
