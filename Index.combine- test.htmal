@@ -1,0 +1,560 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NEET Bio Pro — Combined Question Bank Test</title>
+<style>
+:root{--bg:#f3f6fc;--card:#fff;--text:#172033;--muted:#667085;--line:#dce3ef;--primary:#4f46e5;--soft:#eef2ff;--good:#16804a;--bad:#c62828}
+body.dark{--bg:#101522;--card:#1b2333;--text:#edf2ff;--muted:#a8b4c9;--line:#354158;--primary:#9b91ff;--soft:#2b304c;--good:#64d99a;--bad:#ff9292}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;line-height:1.55}
+header{background:linear-gradient(120deg,#312e81,#4f46e5,#087e8b);color:white;padding:23px 16px}
+.wrap{max-width:1000px;margin:auto;padding:16px}
+h1{margin:0;font-size:clamp(24px,5vw,36px)}
+header p{margin:5px 0 0;color:#e8eaff}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:17px;margin:13px 0;box-shadow:0 4px 16px #00000008}
+label{display:block;font-size:13px;font-weight:700;margin-bottom:5px}
+select,input{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text);font:inherit}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+button{border:0;border-radius:10px;padding:11px 14px;background:var(--primary);color:white;font-weight:700;font-size:14px;cursor:pointer}
+button.secondary{background:var(--soft);color:var(--text);border:1px solid var(--line)}
+button:disabled{opacity:.4;cursor:not-allowed}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:9px}
+.stat{background:var(--soft);border-radius:12px;padding:12px}
+.stat strong{display:block;font-size:22px}
+.small{font-size:13px;color:var(--muted)}
+#question{font-size:19px;font-weight:700;white-space:pre-wrap}
+.option{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid var(--line);border-radius:11px;margin:9px 0;cursor:pointer}
+.option:has(input:checked){border-color:var(--primary);background:var(--soft)}
+.option input{width:auto;margin-top:5px}
+.option.correct{border-color:var(--good)}
+.option.wrong{border-color:var(--bad)}
+#feedback{padding:12px;border-radius:10px;margin-top:12px;white-space:pre-wrap}
+.good{background:#16804a18;color:var(--good)}
+.bad{background:#c6282818;color:var(--bad)}
+.hidden{display:none!important}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:12px}
+#status{white-space:pre-wrap}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>🧬 NEET Bio Pro</h1>
+    <p>Combined Question Bank · Previous NEET Practice</p>
+    <p class="small" style="color:#fff">Separate test page — your original app is not changed.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="card">
+    <div class="filters">
+      <div>
+        <label for="source">Question bank</label>
+        <select id="source">
+          <option value="all">All Questions Combined</option>
+          <option value="pyq">Previous NEET Biology</option>
+          <option value="personal">Saved Personal Questions</option>
+          <option value="extra">Additional JSON database</option>
+        </select>
+      </div>
+      <div>
+        <label for="classFilter">Class</label>
+        <select id="classFilter">
+          <option value="">All classes</option>
+          <option value="11">Class 11</option>
+          <option value="12">Class 12</option>
+        </select>
+      </div>
+      <div>
+        <label for="chapter">Chapter</label>
+        <select id="chapter"><option value="">All chapters</option></select>
+      </div>
+      <div>
+        <label for="search">Search questions</label>
+        <input id="search" placeholder="Search topic or keyword">
+      </div>
+    </div>
+    <div class="actions">
+      <button id="reload">Load / Reload Questions</button>
+      <button id="dark" class="secondary">🌙 Dark mode</button>
+    </div>
+    <p id="status" class="small" role="status">Ready to load the public question dataset.</p>
+  </section>
+
+  <section class="card stats">
+    <div class="stat"><span class="small">Available</span><strong id="total">0</strong></div>
+    <div class="stat"><span class="small">Question</span><strong id="position">0/0</strong></div>
+    <div class="stat"><span class="small">Answered</span><strong id="answered">0</strong></div>
+    <div class="stat"><span class="small">Correct</span><strong id="correctCount">0</strong></div>
+  </section>
+
+  <section class="card">
+    <div class="small" id="metadata">Biology · NEET practice</div>
+    <h2 id="question">Loading question bank…</h2>
+    <div id="options"></div>
+    <div id="feedback" class="hidden"></div>
+    <div class="actions">
+      <button id="check">Check Answer</button>
+      <button id="show" class="secondary">Show Answer</button>
+      <button id="prev" class="secondary">← Previous</button>
+      <button id="next">Next →</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h3>Connect another public JSON question bank (optional)</h3>
+    <p class="small">Paste a direct HTTPS URL to a publicly accessible JSON file. This page will fetch it when you select “Additional JSON database” or “All Questions Combined”. It cannot automatically discover a private or locally embedded bank in the original Bio Pro app.</p>
+    <label for="extraUrl">Direct JSON URL</label>
+    <input id="extraUrl" type="url" placeholder="https://example.com/questions.json">
+    <div class="actions">
+      <button id="saveUrl">Use this JSON URL</button>
+    </div>
+    <p class="small">The URL is kept only in this page's current session; this test page does not write to your original app's saved data.</p>
+  </section>
+
+  <section class="card">
+    <h3>What this test page can access</h3>
+    <ul>
+      <li>Public Previous NEET Biology question JSON.</li>
+      <li>An optional additional public JSON database you provide.</li>
+      <li>Personal questions found in the original app's local saved data, if their structure can be recognized.</li>
+    </ul>
+    <p class="small">This page reads the known local-storage key, if available, without changing or deleting it. Personal questions may not be detected if the app stores them in a different format.</p>
+  </section>
+</main>
+
+<footer>NEET Bio Pro · Independent question-bank test page</footer>
+
+<script>
+"use strict";
+
+const PYQ_URL =
+ "https://raw.githubusercontent.com/AbuRaniya/bankofbiology-neet-quiz/main/Bank_of_Biology_NEET_QuizReady_v5_1_PreviousNEET_Separated.json";
+
+const $ = id => document.getElementById(id);
+let pyqBank = [];
+let extraBank = [];
+let personalBank = [];
+let questions = [];
+let index = 0;
+let answers = {};
+let checked = {};
+let extraUrl = "";
+
+function textValue(v) {
+  if (v === null || v === undefined) return "";
+  if (typeof v === "string" || typeof v === "number") return String(v);
+  return "";
+}
+
+function first(obj, keys) {
+  for (const k of keys) {
+    if (obj && obj[k] !== undefined && obj[k] !== null && obj[k] !== "") {
+      return obj[k];
+    }
+  }
+  return "";
+}
+
+function parseAnswer(raw, options) {
+  let a = textValue(raw).trim();
+  if (!a) return "";
+
+  // Common answer formats: B, (B), option B, or answer text.
+  const letter = a.match(/^(?:OPTION\s*)?[\(\[]?([A-E])[\)\].:]?$/i);
+  if (letter) return letter[1].toUpperCase();
+
+  const numbered = a.match(/^[\(\[]?([1-5])[\)\].:]?$/);
+  if (numbered) return String.fromCharCode(64 + Number(numbered[1]));
+
+  const cleaned = a.replace(/^(answer|correct answer)\s*[:\-]\s*/i, "").trim();
+  const found = options.find(o =>
+    o.text.trim().toLowerCase() === cleaned.toLowerCase()
+  );
+  return found ? found.letter : "";
+}
+
+function normalizeOptions(q) {
+  let raw = first(q, [
+    "options", "choices", "answers", "option_list"
+  ]);
+
+  if (typeof raw === "string") {
+    try { raw = JSON.parse(raw); } catch (_) {}
+  }
+
+  const out = [];
+  if (Array.isArray(raw)) {
+    raw.forEach((v, i) => {
+      const val = typeof v === "object" && v !== null
+        ? textValue(first(v, ["text", "value", "option", "label"]))
+        : textValue(v);
+      if (val.trim()) {
+        out.push({letter:String.fromCharCode(65+i), text:val});
+      }
+    });
+  } else if (raw && typeof raw === "object") {
+    for (const letter of ["A","B","C","D","E"]) {
+      const v = first(raw, [letter, letter.toLowerCase(),
+        "option_"+letter.toLowerCase()]);
+      if (v !== "") out.push({letter, text:textValue(v)});
+    }
+  }
+
+  // Common MedMCQA-style fields.
+  if (!out.length) {
+    for (const [letter, keys] of Object.entries({
+      A:["opa","option_a","optionA","a"],
+      B:["opb","option_b","optionB","b"],
+      C:["opc","option_c","optionC","c"],
+      D:["opd","option_d","optionD","d"],
+      E:["ope","option_e","optionE","e"]
+    })) {
+      const v = first(q, keys);
+      if (v !== "") out.push({letter, text:textValue(v)});
+    }
+  }
+  return out;
+}
+
+function normalizeOne(q, source, i) {
+  if (!q || typeof q !== "object") return null;
+
+  const questionText = textValue(first(q, [
+    "question", "question_text", "questionText", "stem",
+    "question_statement", "text", "ques"
+  ]));
+
+  if (!questionText.trim()) return null;
+
+  const options = normalizeOptions(q);
+  if (options.length < 2) return null;
+
+  const rawAnswer = first(q, [
+    "answer", "correct_answer", "correctAnswer",
+    "correct_option", "answer_key", "cop", "ans", "key"
+  ]);
+
+  const answer = parseAnswer(rawAnswer, options);
+  const chapter = textValue(first(q, [
+    "chapter", "chapter_name", "chapterName", "topic", "unit"
+  ])) || "Unspecified chapter";
+
+  const clsRaw = textValue(first(q, [
+    "class", "class_level", "grade", "standard"
+  ])).toLowerCase();
+
+  let className = "";
+  if (/\b11\b|xi|class.?11/.test(clsRaw)) className = "11";
+  if (/\b12\b|xii|class.?12/.test(clsRaw)) className = "12";
+
+  return {
+    id: textValue(first(q, ["id", "question_id", "qid"])) || source+"-"+i,
+    question: questionText,
+    options,
+    answer,
+    explanation: textValue(first(q, [
+      "explanation", "solution", "rationale", "description"
+    ])),
+    chapter,
+    className,
+    source,
+    raw: q
+  };
+}
+
+function extractArray(data) {
+  if (Array.isArray(data)) return data;
+  if (!data || typeof data !== "object") return [];
+
+  for (const k of ["questions","data","results","items","bank","mcqs"]) {
+    if (Array.isArray(data[k])) return data[k];
+  }
+  return [];
+}
+
+function normalizeBank(data, source) {
+  return extractArray(data)
+    .map((q, i) => normalizeOne(q, source, i))
+    .filter(Boolean);
+}
+
+async function fetchJson(url) {
+  const response = await fetch(url, {cache:"no-store"});
+  if (!response.ok) throw new Error("HTTP " + response.status);
+  return response.json();
+}
+
+function readPersonalQuestions() {
+  // Read-only: never write, clear, or modify the original app's storage.
+  const keys = ["neetPingalCbtLocal_v1"];
+  const found = [];
+
+  for (const key of keys) {
+    try {
+      const raw = localStorage.getItem(key);
+      if (!raw) continue;
+      const data = JSON.parse(raw);
+
+      const possible = [];
+      if (Array.isArray(data)) possible.push(...data);
+      else if (data && typeof data === "object") {
+        for (const field of [
+          "personal","questions","bank","mcqs","personalQuestions"
+        ]) {
+          if (Array.isArray(data[field])) possible.push(...data[field]);
+        }
+      }
+
+      found.push(...normalizeBank(possible, "Personal"));
+    } catch (e) {
+      console.warn("Could not interpret saved question data:", key, e);
+    }
+  }
+
+  const unique = new Map();
+  for (const q of found) {
+    const signature = q.question.trim().toLowerCase();
+    if (signature && !unique.has(signature)) unique.set(signature, q);
+  }
+  return [...unique.values()];
+}
+
+async function loadBanks() {
+  $("status").textContent = "Loading public Previous NEET Biology questions…";
+  try {
+    const data = await fetchJson(PYQ_URL);
+    pyqBank = normalizeBank(data, "Previous NEET");
+    if (!pyqBank.length) {
+      throw new Error("The JSON loaded, but its question format was not recognized.");
+    }
+  } catch (e) {
+    pyqBank = [];
+    $("status").textContent =
+      "Could not load the public Biology dataset. Check internet access and try again.\n" +
+      "Details: " + e.message;
+  }
+
+  personalBank = readPersonalQuestions();
+
+  extraBank = [];
+  if (extraUrl) {
+    try {
+      extraBank = normalizeBank(await fetchJson(extraUrl), "Additional JSON");
+    } catch (e) {
+      $("status").textContent +=
+        "\nAdditional JSON could not be loaded: " + e.message;
+    }
+  }
+
+  applyFilters();
+  if (pyqBank.length) {
+    $("status").textContent =
+      "Loaded " + pyqBank.length + " usable Previous NEET Biology questions." +
+      "\nRecognized saved personal questions: " + personalBank.length +
+      "\nAdditional JSON questions: " + extraBank.length +
+      "\nChoose a question bank below to begin.";
+  }
+}
+
+function sourceBank() {
+  const s = $("source").value;
+  if (s === "pyq") return [...pyqBank];
+  if (s === "personal") return [...personalBank];
+  if (s === "extra") return [...extraBank];
+
+  const combined = [...pyqBank, ...extraBank, ...personalBank];
+  const seen = new Set();
+  return combined.filter(q => {
+    const key = q.question.trim().toLowerCase();
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function applyFilters() {
+  const selectedClass = $("classFilter").value;
+  const selectedChapter = $("chapter").value;
+  const term = $("search").value.trim().toLowerCase();
+
+  const base = sourceBank();
+  questions = base.filter(q => {
+    if (selectedClass && q.className && q.className !== selectedClass) return false;
+    if (selectedChapter && q.chapter !== selectedChapter) return false;
+    if (term && !(
+      q.question.toLowerCase().includes(term) ||
+      q.chapter.toLowerCase().includes(term) ||
+      q.options.some(o => o.text.toLowerCase().includes(term))
+    )) return false;
+    return true;
+  });
+
+  index = Math.min(index, Math.max(0, questions.length - 1));
+  render();
+}
+
+function updateChapters() {
+  const previous = $("chapter").value;
+  const chapters = [...new Set(sourceBank().map(q => q.chapter))]
+    .sort((a,b) => a.localeCompare(b));
+
+  $("chapter").innerHTML = '<option value="">All chapters</option>';
+  for (const ch of chapters) {
+    const option = document.createElement("option");
+    option.value = ch;
+    option.textContent = ch;
+    $("chapter").appendChild(option);
+  }
+  if (chapters.includes(previous)) $("chapter").value = previous;
+}
+
+function render() {
+  $("total").textContent = questions.length;
+  $("position").textContent = questions.length ? (index+1)+"/"+questions.length : "0/0";
+
+  const answeredCount = Object.keys(answers).filter(k => answers[k]).length;
+  $("answered").textContent = answeredCount;
+  $("correctCount").textContent = Object.keys(checked).filter(k => checked[k] === true).length;
+
+  const q = questions[index];
+  $("options").innerHTML = "";
+  $("feedback").className = "hidden";
+  $("feedback").textContent = "";
+
+  if (!q) {
+    $("question").textContent = "No questions found for this selection.";
+    $("metadata").textContent = "Try another question bank, chapter, class, or search term.";
+    $("prev").disabled = true;
+    $("next").disabled = true;
+    $("check").disabled = true;
+    $("show").disabled = true;
+    return;
+  }
+
+  $("question").textContent = q.question;
+  $("metadata").textContent =
+    q.source + " · " + q.chapter +
+    (q.className ? " · Class " + q.className : "") +
+    " · ID: " + q.id;
+
+  q.options.forEach(opt => {
+    const label = document.createElement("label");
+    label.className = "option";
+    if (checked[q.id] && q.answer === opt.letter) label.classList.add("correct");
+    if (checked[q.id] && answers[q.id] === opt.letter &&
+        answers[q.id] !== q.answer) label.classList.add("wrong");
+
+    const radio = document.createElement("input");
+    radio.type = "radio";
+    radio.name = "answer";
+    radio.value = opt.letter;
+    radio.checked = answers[q.id] === opt.letter;
+    radio.addEventListener("change", () => {
+      answers[q.id] = opt.letter;
+      delete checked[q.id];
+      render();
+    });
+
+    const span = document.createElement("span");
+    span.textContent = opt.letter + ". " + opt.text;
+    label.append(radio, span);
+    $("options").appendChild(label);
+  });
+
+  $("prev").disabled = index === 0;
+  $("next").disabled = index >= questions.length - 1;
+  $("check").disabled = !q.answer;
+  $("show").disabled = !q.answer;
+
+  if (checked[q.id] !== undefined) showFeedback(q, false);
+}
+
+function showFeedback(q, reveal) {
+  const box = $("feedback");
+  box.className = "";
+  if (!q.answer) {
+    box.classList.add("bad");
+    box.textContent = "An answer key is not available for this question.";
+    return;
+  }
+
+  const correct = answers[q.id] === q.answer;
+  if (!reveal) box.classList.add(correct ? "good" : "bad");
+
+  const answerOption = q.options.find(o => o.letter === q.answer);
+  let message = (reveal ? "Correct answer: " : (correct ? "Correct! " : "Not quite. ")) +
+    q.answer + (answerOption ? ". " + answerOption.text : "");
+
+  if (q.explanation) message += "\n\nExplanation: " + q.explanation;
+  else message += "\n\nNo explanation was provided in the source dataset.";
+
+  box.textContent = message;
+}
+
+$("check").addEventListener("click", () => {
+  const q = questions[index];
+  if (!q) return;
+  if (!answers[q.id]) {
+    $("feedback").className = "bad";
+    $("feedback").textContent = "Please select an option first.";
+    return;
+  }
+  checked[q.id] = answers[q.id] === q.answer;
+  render();
+});
+
+$("show").addEventListener("click", () => {
+  const q = questions[index];
+  if (q) showFeedback(q, true);
+});
+
+$("prev").addEventListener("click", () => {
+  if (index > 0) { index--; render(); }
+});
+$("next").addEventListener("click", () => {
+  if (index < questions.length - 1) { index++; render(); }
+});
+
+$("source").addEventListener("change", () => {
+  updateChapters();
+  index = 0;
+  applyFilters();
+});
+$("classFilter").addEventListener("change", () => {
+  index = 0;
+  applyFilters();
+});
+$("chapter").addEventListener("change", () => {
+  index = 0;
+  applyFilters();
+});
+$("search").addEventListener("input", () => {
+  index = 0;
+  applyFilters();
+});
+$("reload").addEventListener("click", loadBanks);
+$("dark").addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  $("dark").textContent = document.body.classList.contains("dark")
+    ? "☀️ Light mode" : "🌙 Dark mode";
+});
+$("saveUrl").addEventListener("click", async () => {
+  extraUrl = $("extraUrl").value.trim();
+  if (extraUrl && !/^https:\/\//i.test(extraUrl)) {
+    $("status").textContent = "Please enter a direct HTTPS JSON URL.";
+    return;
+  }
+  $("status").textContent = extraUrl
+    ? "Loading the additional JSON database…"
+    : "No additional JSON URL entered.";
+  await loadBanks();
+});
+loadBanks();
+</script>
+</body>
+</html>
