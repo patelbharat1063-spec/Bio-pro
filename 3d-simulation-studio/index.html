@@ -19,11 +19,11 @@ scene.add(new THREE.HemisphereLight(0xccecff,0x25354a,2));const key=new THREE.Di
 const root=new THREE.Group();scene.add(root);let spinning=false,selected=null;
 const gltfLoader=new GLTFLoader();let assetRequest=0,activeAsset=null;
 const assetMap={
- respiratory:{url:'https://3d.nih.gov/api/submissions/43484/files/input/2104516',entryUrl:'https://3d.nih.gov/entries/3DPX-020974',source:'Lung, Female · NIH 3D / Human Reference Atlas',licenseName:'CC BY 4.0',licenseUrl:'https://creativecommons.org/licenses/by/4.0/',credit:'Human Reference Atlas (HRA), Visible Human Dataset'},
+ respiratory:{url:'https://3d.nih.gov/api/submissions/43484/runs/fb5756e9-4c31-4b28-978a-73d6196d05b7/output-files/2107388',entryUrl:'https://3d.nih.gov/entries/3DPX-020974',source:'Lung, Female · NIH 3D / Human Reference Atlas',licenseName:'CC BY 4.0',licenseUrl:'https://creativecommons.org/licenses/by/4.0/',credit:'Human Reference Atlas (HRA), Visible Human Dataset'},
  circulatory:{url:'https://3d.nih.gov/api/submissions/31826/runs/1472db02-73ca-4c8a-a0e6-8e58aa5a90c2/output-files/865612',entryUrl:'https://3d.nih.gov/entries/3DPX-002636',source:'17 yo Female, Normal Heart · NIH 3D Heart Library',licenseName:'Public Domain',licenseUrl:'https://3d.nih.gov/entries/3DPX-002636',credit:'Matthew Bramlet / NIH 3D Heart Library'},
- eye:{url:'https://3d.nih.gov/api/submissions/43510/files/input/2108248',entryUrl:'https://3d.nih.gov/entries/3DPX-020999',source:'Eye, Male, Right · NIH 3D / Human Reference Atlas',licenseName:'CC BY 4.0',licenseUrl:'https://creativecommons.org/licenses/by/4.0/',credit:'Human Reference Atlas (HRA), Visible Human Male'},
- kidney:{url:'https://3d.nih.gov/api/submissions/43478/files/input/2104510',entryUrl:'https://3d.nih.gov/entries/3DPX-020968',source:'Kidney, Female, Right · NIH 3D / Human Reference Atlas',licenseName:'CC BY 4.0',licenseUrl:'https://creativecommons.org/licenses/by/4.0/',credit:'Human Reference Atlas (HRA), Visible Human Dataset'},
- stomach:{url:'https://3d.nih.gov/api/submissions/45828/files/input/2456633',entryUrl:'https://3d.nih.gov/entries/3DPX-021124',source:'Stomach (ventriculus) · NIH 3D',licenseName:'CC BY 4.0',licenseUrl:'https://creativecommons.org/licenses/by/4.0/',credit:'Johnson J / Custom Boxes UK'}
+ eye:{url:'https://3d.nih.gov/api/submissions/43510/runs/6fb5617a-9078-4061-addd-d9fb8ebfe49c/output-files/2111612',entryUrl:'https://3d.nih.gov/entries/3DPX-020999',source:'Eye, Male, Right · NIH 3D / Human Reference Atlas',licenseName:'CC BY 4.0',licenseUrl:'https://creativecommons.org/licenses/by/4.0/',credit:'Human Reference Atlas (HRA), Visible Human Male'},
+ kidney:{url:'https://3d.nih.gov/api/submissions/43478/runs/4f39b973-ee91-4439-9895-56524fb08e51/output-files/2107397',entryUrl:'https://3d.nih.gov/entries/3DPX-020968',source:'Kidney, Female, Right · NIH 3D / Human Reference Atlas',licenseName:'CC BY 4.0',licenseUrl:'https://creativecommons.org/licenses/by/4.0/',credit:'Human Reference Atlas (HRA), Visible Human Dataset'},
+ stomach:{url:'https://3d.nih.gov/api/submissions/45828/runs/efb870c3-aea6-41cd-9b7c-df0a94a6bd74/output-files/2456642',entryUrl:'https://3d.nih.gov/entries/3DPX-021124',source:'Stomach (ventriculus) · NIH 3D',licenseName:'CC BY 4.0',licenseUrl:'https://creativecommons.org/licenses/by/4.0/',credit:'Johnson J / Custom Boxes UK'}
 };
 const loadStatus=document.createElement('div');loadStatus.style.cssText='position:absolute;top:12px;right:12px;z-index:2;max-width:75%;padding:7px 10px;border-radius:8px;background:#071525cc;color:#e7f6ff;font-size:12px;display:none';stage.appendChild(loadStatus);
 function renderAssetInfo(id,asset){
@@ -45,7 +45,7 @@ function build(id){
   renderAssetInfo(id,assetMap[id]);loadStatus.textContent='Real 3D model loaded';setTimeout(()=>{if(request===assetRequest)loadStatus.style.display='none'},2600);
  },xhr=>{if(request===assetRequest&&xhr.total){loadStatus.textContent='Loading anatomy '+Math.round(xhr.loaded/xhr.total*100)+'%'}},err=>{
   if(request!==assetRequest)return;
-  loadStatus.textContent='External model unavailable · showing built-in study schematic';buildSchematic(id);
+  const reason=err&&err.message?String(err.message).slice(0,140):'Network, CORS or unsupported asset response';loadStatus.textContent='Detailed model could not load ('+reason+') · built-in study schematic shown';buildSchematic(id);
  });
 }
 const mat=(color,roughness=.55,transparent=false,opacity=1)=>new THREE.MeshStandardMaterial({color,roughness,metalness:.04,transparent,opacity});
