@@ -27,57 +27,6 @@ body[data-theme="dark"]{--bg:#101923;--ink:#edf5fb;--muted:#a8bac9;--line:#33455
 <footer>Advanced NEET Pro • Separate app path in the Bio Pro repository • MCQ source: NEET Smart Board</footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-/* Reliable login handler: runs before the app script and reports errors visibly. */
-(()=> {
-  const button=document.getElementById('loginBtn');
-  if(!button) return;
-  button.type='button';
-  button.addEventListener('click',async event=>{
-    event.preventDefault();
-    event.stopImmediatePropagation();
-    const show=(message,kind='error')=>{
-      const box=document.getElementById('authMsg');
-      if(box){box.textContent=message;box.className='notice'+(kind?' '+kind:'');}
-    };
-    const email=document.getElementById('email')?.value.trim();
-    const password=document.getElementById('password')?.value;
-    if(!email||!password){show('Enter your registered email and password.');return;}
-    button.disabled=true;
-    button.textContent='Connecting…';
-    show('Connecting securely to NEET Smart Board…','');
-    try{
-      if(!window.supabase?.createClient) throw new Error('The Supabase login library did not load. Check your internet connection, then refresh this page.');
-      const api=window.supabase.createClient(
-        'https://laqbemctxffaglgkffms.supabase.co',
-        'sb_publishable_ubNb3aq7BGNPUeYsr0V9Jg_SEW3wz6J',
-        {auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}}
-      );
-      const {data:authData,error:authError}=await api.auth.signInWithPassword({email,password});
-      if(authError) throw authError;
-      const {data:profile,error:profileError}=await api.from('neet_profiles')
-        .select('role,approval_status,access_expires_at,username')
-        .eq('user_id',authData.user.id).maybeSingle();
-      if(profileError) throw profileError;
-      if(!profile) throw new Error('Your NEET Smart Board profile was not found. Contact Teacher/Admin.');
-      const role=String(profile.role||'student').toLowerCase();
-      const approved=String(profile.approval_status||'pending').toLowerCase()==='approved';
-      const mode=document.getElementById('staffMode')?.classList.contains('secondary')?'student':'staff';
-      if(mode==='staff'&&!['teacher','admin'].includes(role)) throw new Error('This account is not a Teacher/Admin account. Select Student login or use your Teacher/Admin email.');
-      if(mode==='student'&&['teacher','admin'].includes(role)) throw new Error('This is a Teacher/Admin account. Select Teacher / Admin login.');
-      if(!approved) throw new Error(profile.approval_status==='rejected'?'Account access was rejected. Contact Teacher/Admin.':'Your account is awaiting Teacher/Admin approval.');
-      if(!['teacher','admin'].includes(role)&&(!profile.access_expires_at||new Date(profile.access_expires_at)<=new Date())) throw new Error('Student access has expired. Ask Teacher/Admin to renew it.');
-      show('Login successful. Opening Advanced NEET Pro…','success');
-      button.textContent='Opening app…';
-      window.location.reload();
-    }catch(error){
-      show(error?.message||String(error),'error');
-      button.disabled=false;
-      button.textContent=document.getElementById('staffMode')?.classList.contains('secondary')?'Student sign in & load all MCQs':'Teacher/Admin sign in';
-    }
-  },true);
-})();
-</script>
-<script>
 (()=>{'use strict';
 const $=id=>document.getElementById(id),URL='https://laqbemctxffaglgkffms.supabase.co',KEY='sb_publishable_ubNb3aq7BGNPUeYsr0V9Jg_SEW3wz6J';
 const SUBJECTS=['Botany','Zoology','Physics','Chemistry','Biology'];let client=null,profile=null,loginMode='student',questions=[],chapters=[],attemptRows=[],active=[],answers={},marked=new Set(),current=0,seconds=0,tick=null,bankPage=1,testStartedAt=0;
@@ -91,7 +40,37 @@ async function verifyProfile(){const {data:sd,error:se}=await client.auth.getSes
 async function connect(){clientReady();profile=await verifyProfile();const role=String(profile.role||'student').toLowerCase();$('authPanel').classList.add('hidden');$('app').classList.remove('hidden');$('accountTag').textContent='Signed in: '+(profile.username||role);$('connectionTag').textContent='Connecting…';$('signOut').classList.remove('hidden');await loadData();}
 function setLoginMode(mode){loginMode=mode;$('studentMode').classList.toggle('secondary',mode!=='student');$('staffMode').classList.toggle('secondary',mode!=='staff');$('loginBtn').textContent=mode==='student'?'Student sign in & load all MCQs':'Teacher/Admin sign in';$('authMsg').textContent=mode==='student'?'Sign in with your approved student account to load all five categories.':'Sign in with your approved Teacher/Admin account.';}
 $('studentMode').onclick=()=>setLoginMode('student');$('staffMode').onclick=()=>setLoginMode('staff');
-$('loginBtn').onclick=async()=>{try{$('loginBtn').disabled=true;msg('authMsg','Signing in…');clientReady();const email=$('email').value.trim(),password=$('password').value;if(!email||!password)throw Error('Enter registered email and password.');const {error}=await client.auth.signInWithPassword({email,password});if(error)throw error;await connect();}catch(e){msg('authMsg',e.message||String(e),'error');if(client)await client.auth.signOut();}finally{$('loginBtn').disabled=false;}};
+$('loginBtn').onclick=async()=>{
+  const button=$('loginBtn');
+  let signedInHere=false;
+  try{
+    const email=$('email').value.trim(),password=$('password').value;
+    if(!email||!password)throw Error('Enter your registered email and password.');
+    button.disabled=true;
+    button.textContent='Signing in…';
+    msg('authMsg','Connecting securely to NEET Smart Board…');
+    clientReady();
+    const {error}=await client.auth.signInWithPassword({email,password});
+    if(error)throw error;
+    signedInHere=true;
+    profile=await verifyProfile();
+    const role=String(profile.role||'student').toLowerCase();
+    if(loginMode==='staff'&&!['teacher','admin'].includes(role))
+      throw Error('This account is not a Teacher/Admin account. Choose Student login or use an approved Teacher/Admin account.');
+    if(loginMode==='student'&&['teacher','admin'].includes(role))
+      throw Error('This is a Teacher/Admin account. Choose Teacher / Admin login.');
+    msg('authMsg','Login successful. Loading all five MCQ categories…','success');
+    await connect();
+  }catch(e){
+    if(signedInHere&&client){try{await client.auth.signOut();}catch(signOutError){console.warn('Session cleanup failed:',signOutError);}}
+    msg('authMsg',e?.message||String(e),'error');
+    $('accountTag').textContent='Not signed in';
+    $('connectionTag').textContent='MCQ bank not connected';
+  }finally{
+    button.disabled=false;
+    button.textContent=loginMode==='student'?'Student sign in & load all MCQs':'Teacher/Admin sign in';
+  }
+};
 $('signOut').onclick=async()=>{if(client)await client.auth.signOut();location.reload();};
 async function loadData(){try{$('connectionTag').textContent='Loading all MCQs…';let rows=[],from=0,batch=1000;while(true){const {data,error}=await client.from('neet_questions').select('id,chapter_id,chapter_name,subject,question,options,correct_index,explanation,source_label,created_at').in('subject',SUBJECTS).order('created_at',{ascending:false}).range(from,from+batch-1);if(error)throw error;rows=rows.concat(data||[]);$('connectionTag').textContent='Loading MCQs • '+rows.length.toLocaleString();if(!data||data.length<batch)break;from+=batch;}$('totalQ').textContent=rows.length.toLocaleString();questions=rows;const {data:ch,error:ce}=await client.from('neet_chapters').select('id,subject,name,sort_order').order('sort_order');if(ce)throw ce;chapters=ch||[];fillChapters();renderSubjectCards();$('connectionTag').textContent='Connected • '+questions.length.toLocaleString()+' MCQs';$('connectionTag').className='pill';await loadAttempts();}catch(e){$('connectionTag').textContent='Connection error';msg('authMsg',e.message||String(e),'error');}}
 function renderSubjectCards(){$('subjectCards').innerHTML=SUBJECTS.map(s=>{const n=questions.filter(q=>q.subject===s).length;return '<div class="subject" data-subject="'+s+'"><strong>'+s+'</strong><span>'+n.toLocaleString()+' questions • click to practice</span></div>';}).join('');$('subjectCards').querySelectorAll('[data-subject]').forEach(el=>el.onclick=()=>{document.querySelectorAll('#subjectChecks input').forEach(x=>x.checked=x.value===el.dataset.subject);clearChapterSelections();$('questionCount').value=20;$('testTitle').value=el.dataset.subject+' Practice';switchTab('builder');});$('subjectChecks').innerHTML=SUBJECTS.map(s=>'<label class="subject"><input type="checkbox" value="'+s+'" checked> '+s+'<span style="display:block">'+questions.filter(q=>q.subject===s).length.toLocaleString()+' MCQs</span></label>').join('');$('subjectChecks').querySelectorAll('input').forEach(x=>x.onchange=updateChapterPanelVisibility);renderSubjectChapterFilters();}
@@ -118,6 +97,6 @@ async function startWeakTest(items){try{if(!items.length)throw Error('No weak ch
 $('selectAllChapters').onclick=()=>{SUBJECTS.forEach(s=>{const el=$('chapters-'+s);if(el)[...el.options].forEach(o=>o.selected=true);});};$('clearChapterSelections').onclick=clearChapterSelections;
 $('duration').onchange=()=>{};
 $('questionCount').onchange=()=>{};
-(async()=>{try{clientReady();const {data}=await client.auth.getSession();if(data?.session){await connect();}}catch(e){console.info('Sign in required:',e.message);}})();
+(async()=>{try{clientReady();const {data}=await client.auth.getSession();if(data?.session){await connect();}}catch(e){msg('authMsg',e?.message||String(e),'error');console.warn('Advanced NEET Pro session restore failed:',e);}})();
 })();
 </script></body></html>
