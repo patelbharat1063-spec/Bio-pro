@@ -6,7 +6,7 @@ const staff=()=>['admin','teacher'].includes(role);
 function makeUI(){
  if(document.getElementById('neetVacancyModal'))return;
  const b=document.createElement('button');openButton=b;b.type='button';b.textContent='🌿 Botany Vacancies';b.id='neetVacancyOpen';
- b.style.cssText='display:none;border:1px solid #39bfae;background:#174a52;color:#eafffa;border-radius:10px;padding:10px 12px;font:700 12px system-ui;cursor:pointer;margin:6px;';
+ b.style.cssText='border:1px solid #39bfae;background:#174a52;color:#eafffa;border-radius:10px;padding:10px 12px;font:700 12px system-ui;cursor:pointer;margin:6px;';
  const host=document.querySelector('.sidebar .navgroup')||document.querySelector('nav');
  if(host)host.appendChild(b);
  const wrap=document.createElement('div');wrap.id='neetVacancyModal';wrap.style.cssText='display:none;position:fixed;inset:0;z-index:99999;background:#07101de8;padding:12px;overflow:auto;font:14px/1.5 system-ui;color:#eaf3ff';
@@ -28,8 +28,8 @@ async function getClient(){
  uid=data.session.user.id;return client;
 }
 async function authorize(){
- try{await getClient();const {data:p,error}=await client.from('neet_profiles').select('role,approval_status,access_expires_at,username').eq('user_id',uid).maybeSingle();if(error)throw error;if(!p)throw Error('Staff profile not found.');role=String(p.role||'student').toLowerCase();if(!['admin','teacher'].includes(role)||String(p.approval_status||'').toLowerCase()!=='approved')throw Error('Access denied. This vacancy module is restricted to approved Admin/Teacher accounts.');if(role==='teacher'&&p.access_expires_at&&new Date(p.access_expires_at)<=new Date())throw Error('Teacher access has expired. Contact the NEET Smart Board Admin.');openButton.style.display='inline-block';document.getElementById('nvWho').textContent='Access verified: '+(p.username||role)+' · '+role.toUpperCase();document.getElementById('nvContent').style.display='block';message('Staff access verified. Vacancy data is protected by Supabase Row Level Security.');await loadRows();}
- catch(e){role=null;if(openButton)openButton.style.display='none';document.getElementById('nvContent').style.display='none';message(e.message||String(e),true);}
+ try{await getClient();const {data:p,error}=await client.from('neet_profiles').select('role,approval_status,access_expires_at,username').eq('user_id',uid).maybeSingle();if(error)throw error;if(!p)throw Error('Staff profile not found.');role=String(p.role||'student').toLowerCase();if(!['admin','teacher'].includes(role)||String(p.approval_status||'').toLowerCase()!=='approved')throw Error('Access denied. This vacancy module is restricted to approved Admin/Teacher accounts.');if(role==='teacher'&&p.access_expires_at&&new Date(p.access_expires_at)<=new Date())throw Error('Teacher access has expired. Contact the NEET Smart Board Admin.');document.getElementById('nvWho').textContent='Access verified: '+(p.username||role)+' · '+role.toUpperCase();document.getElementById('nvContent').style.display='block';message('Staff access verified. Vacancy data is protected by Supabase Row Level Security.');await loadRows();}
+ catch(e){role=null;document.getElementById('nvContent').style.display='none';message(e.message||String(e),true);}
 }
 async function loadRows(){
  try{if(!staff())await authorize();if(!staff())return;message('Loading vacancy records…');const {data,error}=await client.from('neet_faculty_vacancies').select('*').order('created_at',{ascending:false}).limit(500);if(error)throw error;rows=data||[];const {data:tr,error:te}=await client.from('neet_faculty_job_tracking').select('vacancy_id,application_status,notes,reminder_date').eq('user_id',uid);if(te)throw te;tracking={};(tr||[]).forEach(x=>tracking[x.vacancy_id]=x);message('Loaded '+rows.length+' vacancy records. Unverified leads are clearly labelled.');render();}
