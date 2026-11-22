@@ -246,8 +246,8 @@ function renderAdvancedInsights(){
   const head=['attempt_id','completed_at','exam_title','subject','total_questions','attempted_count','correct_count','score','accuracy','question_results_json'];
   const quote=v=>'"'+String(v??'').replace(/"/g,'""')+'"';
   const csv=[head.map(quote).join(','),...attemptRows.map(a=>[a.id,a.completed_at,a.exam_title,a.subject,a.total_questions,a.attempted_count,a.correct_count,a.score,a.accuracy,JSON.stringify(a.question_results||[])].map(quote).join(','))].join('\r\n');
-  const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),link=document.createElement('a');
-  link.href=url;link.download='Bio-Pro-lifetime-attempt-history.csv';document.body.appendChild(link);link.click();link.remove();URL.revokeObjectURL(url);
+  const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'}),url=window.URL.createObjectURL(blob),link=document.createElement('a');
+  link.href=url;link.download='Bio-Pro-lifetime-attempt-history.csv';document.body.appendChild(link);link.click();link.remove();window.URL.revokeObjectURL(url);
   $('lifetimeMsg').textContent='Exported '+attemptRows.length+' saved attempts. Keep this file in a secure backup location.';
  };
 }
