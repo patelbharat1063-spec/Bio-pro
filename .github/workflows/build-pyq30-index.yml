@@ -1,0 +1,67 @@
+name: Build 30-year Biology PYQ chapter index
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pyq30-index-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  extract-index:
+    # Runs only on the selected branch; never pushes to the default branch automatically.
+    if: github.ref != 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out selected feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Install archive and PDF tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y 7zip
+          python -m pip install --upgrade pip
+          python -m pip install pymupdf
+
+      - name: Download source files
+        run: |
+          mkdir -p .pyq30/source .pyq30/extracted
+          base="https://raw.githubusercontent.com/manjunath5496/30-Years-NEET-AIPMT-Chapterwise-Paper-and-Solution-Biology/HEAD"
+          for file in 1_m72.rar 91_m72.rar 181_m72.rar 271_m72.rar 361_m72.rar; do
+            curl --fail --location --retry 3 "$base/$file" -o ".pyq30/source/$file"
+          done
+          curl --fail --location --retry 3 "$base/451_m72.pdf" -o ".pyq30/source/451_m72.pdf"
+          curl --fail --location --retry 3 "$base/README.md" -o ".pyq30/source/README.md"
+
+      - name: Extract PDFs from RAR archives
+        run: |
+          set +e
+          for archive in .pyq30/source/*.rar; do
+            name="$(basename "$archive" .rar)"
+            mkdir -p ".pyq30/extracted/$name"
+            7zz x -y "-o.pyq30/extracted/$name" "$archive"
+            status=$?
+            echo "$name extraction_exit_code=$status"
+          done
+          set -e
+          find .pyq30/extracted -type f -iname '*.pdf' -print
+
+      - name: Build heading-only index
+        run: python tools/build_pyq30_index.py
+
+      - name: Commit generated chapter index on this feature branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data/pyq30-index.json
+          if git diff --cached --quiet; then
+            echo "No index changes."
+          else
+            git commit -m "Build 30-year Biology PYQ chapter index"
+            git push origin "HEAD:${{ github.ref_name }}"
+          fi
