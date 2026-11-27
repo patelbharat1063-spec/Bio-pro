@@ -46,8 +46,8 @@ for pdf_path in PDFS:
         continue
     for page_no, page in enumerate(doc, start=1):
         rows = page_lines(page)
-        if not rows:
-            # These source PDFs are scanned images, so use OCR as a fallback.
+        if not rows or all(re.search(r"(?i)(https?://|t\.me/|estore33)", text) for text, _, _ in rows):
+            # These source PDFs are scanned images with watermark-only text; use OCR.
             pix = page.get_pixmap(matrix=fitz.Matrix(1.7, 1.7), alpha=False)
             image = Image.open(io.BytesIO(pix.tobytes("png")))
             ocr_text = pytesseract.image_to_string(image, config="--psm 6")
