@@ -47,7 +47,7 @@ jobs:
           for archive in .pyq30/source/*.rar; do
             name="$(basename "$archive" .rar)"
             mkdir -p ".pyq30/extracted/$name"
-            7zz x -y "-o.pyq30/extracted/$name" "$archive"
+            7z x -y "-o.pyq30/extracted/$name" "$archive"
             status=$?
             echo "$name extraction_exit_code=$status"
           done
