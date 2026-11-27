@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "generated_by": "tools/build_pyq30_index.py",
+  "source_repository": "https://github.com/manjunath5496/30-Years-NEET-AIPMT-Chapterwise-Paper-and-Solution-Biology",
+  "content_policy": "Metadata-only index. No question text, options, answer keys, or explanations are stored.",
+  "extraction": {
+    "pdf_files_found": 1,
+    "candidate_heading_count": 1,
+    "status": "review_required",
+    "note": "Automated heading candidates require human verification before being treated as official chapter names."
+  },
+  "headings": [
+    {
+      "heading": "http://www.estore33.com",
+      "sources": [
+        {
+          "file": "451_m72.pdf",
+          "page": 1
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 2
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 3
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 4
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 5
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 6
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 7
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 8
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 9
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 10
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 11
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 12
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 13
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 14
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 15
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 16
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 17
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 18
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 19
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 20
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 21
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 22
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 23
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 24
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 25
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 26
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 27
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 28
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 29
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 30
+        },
+        {
+          "file": "451_m72.pdf",
+          "page": 31
+        }
+      ]
+    }
+  ]
+}
