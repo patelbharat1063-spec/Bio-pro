@@ -42,7 +42,8 @@ for path in pdfs:
             "alphabetic_tokens_excluding_watermark": len(meaningful),
             "median_confidence": round(statistics.median(confidences), 1) if confidences else 0,
         })
+    page_count = len(doc)
     doc.close()
-    report.append({"file": path.name, "pages": len(doc), "sample": page_results})
+    report.append({"file": path.name, "pages": page_count, "sample": page_results})
 
 print("OCR_DIAGNOSTIC_JSON=" + json.dumps(report, separators=(",", ":")))
