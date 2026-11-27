@@ -10,6 +10,9 @@ import json
 import re
 from pathlib import Path
 import fitz
+import io
+import pytesseract
+from PIL import Image
 
 ROOT = Path(".pyq30")
 OUT = Path("public/data/pyq30-index.json")
@@ -44,7 +47,12 @@ for pdf_path in PDFS:
     for page_no, page in enumerate(doc, start=1):
         rows = page_lines(page)
         if not rows:
-            continue
+            # These source PDFs are scanned images, so use OCR as a fallback.
+            pix = page.get_pixmap(matrix=fitz.Matrix(1.7, 1.7), alpha=False)
+            image = Image.open(io.BytesIO(pix.tobytes("png")))
+            ocr_text = pytesseract.image_to_string(image, config="--psm 6")
+            ocr_lines = [clean(line) for line in ocr_text.splitlines()]
+            rows = [(line, 14.0, 16) for line in ocr_lines if line and len(line) <= 100]
         sizes = sorted(size for _, size, _ in rows if size > 0)
         median = sizes[len(sizes)//2] if sizes else 0
         for text, size, flags in rows:
@@ -54,7 +62,10 @@ for pdf_path in PDFS:
             if len(text) < 3 or re.fullmatch(r"[\d\W]+", text):
                 continue
             # Exclude common running headers and question/answer material.
-            if re.search(r"(?i)\b(question|answer|solution|option|aipmt|neet\s*\d{4})\b", text):
+            if re.search(r"(?i)\b(question|answer|solution|option|aipmt|neet\s*\d{4}|estore33|telegram|https?://)\b", text):
+                continue
+            letters = [c for c in text if c.isalpha()]
+            if letters and sum(c.isupper() for c in letters) / len(letters) < 0.55:
                 continue
             key = text.casefold()
             entry = HEADINGS.setdefault(key, {"heading": text, "sources": []})
@@ -72,7 +83,8 @@ payload = {
         "pdf_files_found": len(PDFS),
         "candidate_heading_count": len(HEADINGS),
         "status": "review_required" if HEADINGS else "no_headings_detected",
-        "note": "Automated heading candidates require human verification before being treated as official chapter names."
+        "ocr_enabled": True,
+        "note": "Scanned pages are OCR-processed. Candidate headings remain unverified and must be checked against the source before use."
     },
     "headings": sorted(HEADINGS.values(), key=lambda x: (x["heading"].casefold(), x["heading"]))
 }
