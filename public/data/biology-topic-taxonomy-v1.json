@@ -1,0 +1,1605 @@
+{
+  "schema_version": "1.0.0",
+  "title": "Bio Pro Biology PYQ Topic Taxonomy",
+  "status": "draft_for_review",
+  "purpose": "Topic mapping framework for classifying licensed or otherwise authorised NEET/AIPMT Biology question records.",
+  "notes": [
+    "This file contains chapter and topic labels only; it does not contain extracted historical questions, options, answers, or explanations.",
+    "Topic assignments for individual questions must be reviewed against the source question.",
+    "Do not import question content unless the source permits reuse or the user supplies authorised content."
+  ],
+  "chapters": [
+    {
+      "class_level": "12",
+      "chapter_id": "ECO",
+      "chapter_name": "Ecosystem",
+      "topics": [
+        {
+          "topic_id": "ECO-01",
+          "topic_name": "Ecosystem structure"
+        },
+        {
+          "topic_id": "ECO-02",
+          "topic_name": "Productivity"
+        },
+        {
+          "topic_id": "ECO-03",
+          "topic_name": "Decomposition"
+        },
+        {
+          "topic_id": "ECO-04",
+          "topic_name": "Energy flow"
+        },
+        {
+          "topic_id": "ECO-05",
+          "topic_name": "Ecological pyramids"
+        },
+        {
+          "topic_id": "ECO-06",
+          "topic_name": "Nutrient cycling"
+        },
+        {
+          "topic_id": "ECO-07",
+          "topic_name": "Ecological succession"
+        }
+      ]
+    },
+    {
+      "class_level": "12",
+      "chapter_id": "BIO",
+      "chapter_name": "Biodiversity and Conservation",
+      "topics": [
+        {
+          "topic_id": "BIO-01",
+          "topic_name": "Levels of biodiversity"
+        },
+        {
+          "topic_id": "BIO-02",
+          "topic_name": "Patterns of biodiversity"
+        },
+        {
+          "topic_id": "BIO-03",
+          "topic_name": "Importance of biodiversity"
+        },
+        {
+          "topic_id": "BIO-04",
+          "topic_name": "Biodiversity loss"
+        },
+        {
+          "topic_id": "BIO-05",
+          "topic_name": "Extinction"
+        },
+        {
+          "topic_id": "BIO-06",
+          "topic_name": "Biodiversity hotspots"
+        },
+        {
+          "topic_id": "BIO-07",
+          "topic_name": "In-situ conservation"
+        },
+        {
+          "topic_id": "BIO-08",
+          "topic_name": "Ex-situ conservation"
+        }
+      ]
+    },
+    {
+      "class_level": "12",
+      "chapter_id": "ENV",
+      "chapter_name": "Environmental Issues",
+      "topics": [
+        {
+          "topic_id": "ENV-01",
+          "topic_name": "Air pollution"
+        },
+        {
+          "topic_id": "ENV-02",
+          "topic_name": "Water pollution"
+        },
+        {
+          "topic_id": "ENV-03",
+          "topic_name": "Solid waste management"
+        },
+        {
+          "topic_id": "ENV-04",
+          "topic_name": "Agrochemicals"
+        },
+        {
+          "topic_id": "ENV-05",
+          "topic_name": "Greenhouse effect"
+        },
+        {
+          "topic_id": "ENV-06",
+          "topic_name": "Ozone depletion"
+        },
+        {
+          "topic_id": "ENV-07",
+          "topic_name": "Deforestation"
+        }
+      ]
+    },
+    {
+      "class_level": "12",
+      "chapter_id": "SRP",
+      "chapter_name": "Sexual Reproduction in Flowering Plants",
+      "topics": [
+        {
+          "topic_id": "SRP-01",
+          "topic_name": "Flower structure"
+        },
+        {
+          "topic_id": "SRP-02",
+          "topic_name": "Microsporogenesis"
+        },
+        {
+          "topic_id": "SRP-03",
+          "topic_name": "Pollen grains"
+        },
+        {
+          "topic_id": "SRP-04",
+          "topic_name": "Ovule"
+        },
+        {
+          "topic_id": "SRP-05",
+          "topic_name": "Megasporogenesis"
+        },
+        {
+          "topic_id": "SRP-06",
+          "topic_name": "Pollination"
+        },
+        {
+          "topic_id": "SRP-07",
+          "topic_name": "Outbreeding devices"
+        },
+        {
+          "topic_id": "SRP-08",
+          "topic_name": "Pollen-pistil interaction"
+        },
+        {
+          "topic_id": "SRP-09",
+          "topic_name": "Double fertilisation"
+        },
+        {
+          "topic_id": "SRP-10",
+          "topic_name": "Post-fertilisation events"
+        },
+        {
+          "topic_id": "SRP-11",
+          "topic_name": "Apomixis, polyembryony and parthenocarpy"
+        }
+      ]
+    },
+    {
+      "class_level": "12",
+      "chapter_id": "HUR",
+      "chapter_name": "Human Reproduction",
+      "topics": [
+        {
+          "topic_id": "HUR-01",
+          "topic_name": "Male reproductive system"
+        },
+        {
+          "topic_id": "HUR-02",
+          "topic_name": "Female reproductive system"
+        },
+        {
+          "topic_id": "HUR-03",
+          "topic_name": "Spermatogenesis"
+        },
+        {
+          "topic_id": "HUR-04",
+          "topic_name": "Sperm structure"
+        },
+        {
+          "topic_id": "HUR-05",
+          "topic_name": "Oogenesis"
+        },
+        {
+          "topic_id": "HUR-06",
+          "topic_name": "Menstrual cycle"
+        },
+        {
+          "topic_id": "HUR-07",
+          "topic_name": "Reproductive hormones"
+        },
+        {
+          "topic_id": "HUR-08",
+          "topic_name": "Fertilisation"
+        },
+        {
+          "topic_id": "HUR-09",
+          "topic_name": "Cleavage and implantation"
+        },
+        {
+          "topic_id": "HUR-10",
+          "topic_name": "Pregnancy"
+        },
+        {
+          "topic_id": "HUR-11",
+          "topic_name": "Parturition and lactation"
+        }
+      ]
+    },
+    {
+      "class_level": "12",
+      "chapter_id": "REH",
+      "chapter_name": "Reproductive Health",
+      "topics": [
+        {
+          "topic_id": "REH-01",
+          "topic_name": "Reproductive health"
+        },
+        {
+          "topic_id": "REH-02",
+          "topic_name": "Population explosion"
+        },
+        {
+          "topic_id": "REH-03",
+          "topic_name": "Natural methods of contraception"
+        },
+        {
+          "topic_id": "REH-04",
+          "topic_name": "Barrier methods"
+        },
+        {
+          "topic_id": "REH-05",
+          "topic_name": "Intrauterine devices"
+        },
+        {
+          "topic_id": "REH-06",
+          "topic_name": "Hormonal contraception"
+        },
+        {
+          "topic_id": "REH-07",
+          "topic_name": "Surgical methods"
+        },
+        {
+          "topic_id": "REH-08",
+          "topic_name": "Medical termination of pregnancy"
+        },
+        {
+          "topic_id": "REH-09",
+          "topic_name": "Sexually transmitted infections"
+        },
+        {
+          "topic_id": "REH-10",
+          "topic_name": "Infertility"
+        },
+        {
+          "topic_id": "REH-11",
+          "topic_name": "Assisted reproductive technologies"
+        }
+      ]
+    },
+    {
+      "class_level": "12",
+      "chapter_id": "PIV",
+      "chapter_name": "Principles of Inheritance and Variation",
+      "topics": [
+        {
+          "topic_id": "PIV-01",
+          "topic_name": "Mendel's experiments and laws"
+        },
+        {
+          "topic_id": "PIV-02",
+          "topic_name": "Monohybrid cross"
+        },
+        {
+          "topic_id": "PIV-03",
+          "topic_name": "Dihybrid cross"
+        },
+        {
+          "topic_id": "PIV-04",
+          "topic_name": "Test cross and back cross"
+        },
+        {
+          "topic_id": "PIV-05",
+          "topic_name": "Incomplete dominance"
+        },
+        {
+          "topic_id": "PIV-06",
+          "topic_name": "Codominance"
+        },
+        {
+          "topic_id": "PIV-07",
+          "topic_name": "Multiple alleles"
+        },
+        {
+          "topic_id": "PIV-08",
+          "topic_name": "Pleiotropy"
+        },
+        {
+          "topic_id": "PIV-09",
+          "topic_name": "Polygenic inheritance"
+        },
+        {
+          "topic_id": "PIV-10",
+          "topic_name": "Chromosomal theory of inheritance"
+        },
+        {
+          "topic_id": "PIV-11",
+          "topic_name": "Linkage and recombination"
+        },
+        {
+          "topic_id": "PIV-12",
+          "topic_name": "Sex determination"
+        },
+        {
+          "topic_id": "PIV-13",
+          "topic_name": "Sex-linked inheritance"
+        },
+        {
+          "topic_id": "PIV-14",
+          "topic_name": "Mendelian disorders"
+        },
+        {
+          "topic_id": "PIV-15",
+          "topic_name": "Chromosomal disorders"
+        }
+      ]
+    },
+    {
+      "class_level": "12",
+      "chapter_id": "MBI",
+      "chapter_name": "Molecular Basis of Inheritance",
+      "topics": [
+        {
+          "topic_id": "MBI-01",
+          "topic_name": "Genetic material"
+        },
+        {
+          "topic_id": "MBI-02",
+          "topic_name": "Experiments identifying DNA as genetic material"
+        },
+        {
+          "topic_id": "MBI-03",
+          "topic_name": "DNA structure"
+        },
+        {
+          "topic_id": "MBI-04",
+          "topic_name": "DNA packaging"
+        },
+        {
+          "topic_id": "MBI-05",
+          "topic_name": "DNA replication"
+        },
+        {
+          "topic_id": "MBI-06",
+          "topic_name": "Transcription"
+        },
+        {
+          "topic_id": "MBI-07",
+          "topic_name": "Genetic code"
+        },
+        {
+          "topic_id": "MBI-08",
+          "topic_name": "Translation"
+        },
+        {
+          "topic_id": "MBI-09",
+          "topic_name": "Lac operon"
+        },
+        {
+          "topic_id": "MBI-10",
+          "topic_name": "Human Genome Project"
+        },
+        {
+          "topic_id": "MBI-11",
+          "topic_name": "DNA fingerprinting"
+        }
+      ]
+    },
+    {
+      "class_level": "12",
+      "chapter_id": "EVO",
+      "chapter_name": "Evolution",
+      "topics": [
+        {
+          "topic_id": "EVO-01",
+          "topic_name": "Origin of life"
+        },
+        {
+          "topic_id": "EVO-02",
+          "topic_name": "Origin of first cells"
+        },
+        {
+          "topic_id": "EVO-03",
+          "topic_name": "Evidence for evolution"
+        },
+        {
+          "topic_id": "EVO-04",
+          "topic_name": "Adaptive radiation"
+        },
+        {
+          "topic_id": "EVO-05",
+          "topic_name": "Biological evolution"
+        },
+        {
+          "topic_id": "EVO-06",
+          "topic_name": "Theories of evolution"
+        },
+        {
+          "topic_id": "EVO-07",
+          "topic_name": "Hardy-Weinberg principle"
+        },
+        {
+          "topic_id": "EVO-08",
+          "topic_name": "Mechanisms of evolution"
+        },
+        {
+          "topic_id": "EVO-09",
+          "topic_name": "Types of natural selection"
+        },
+        {
+          "topic_id": "EVO-10",
+          "topic_name": "Speciation"
+        },
+        {
+          "topic_id": "EVO-11",
+          "topic_name": "Human evolution"
+        }
+      ]
+    },
+    {
+      "class_level": "12",
+      "chapter_id": "HHD",
+      "chapter_name": "Human Health and Disease",
+      "topics": [
+        {
+          "topic_id": "HHD-01",
+          "topic_name": "Health and disease concepts"
+        },
+        {
+          "topic_id": "HHD-02",
+          "topic_name": "Infectious diseases"
+        },
+        {
+          "topic_id": "HHD-03",
+          "topic_name": "Immunity"
+        },
+        {
+          "topic_id": "HHD-04",
+          "topic_name": "Innate immunity and barriers"
+        },
+        {
+          "topic_id": "HHD-05",
+          "topic_name": "Acquired immunity"
+        },
+        {
+          "topic_id": "HHD-06",
+          "topic_name": "Antibodies"
+        },
+        {
+          "topic_id": "HHD-07",
+          "topic_name": "Vaccination and immunisation"
+        },
+        {
+          "topic_id": "HHD-08",
+          "topic_name": "Immune system disorders"
+        },
+        {
+          "topic_id": "HHD-09",
+          "topic_name": "AIDS"
+        },
+        {
+          "topic_id": "HHD-10",
+          "topic_name": "Cancer"
+        },
+        {
+          "topic_id": "HHD-11",
+          "topic_name": "Drugs and alcohol abuse"
+        }
+      ]
+    },
+    {
+      "class_level": "12",
+      "chapter_id": "MHW",
+      "chapter_name": "Microbes in Human Welfare",
+      "topics": [
+        {
+          "topic_id": "MHW-01",
+          "topic_name": "Microbes in household products"
+        },
+        {
+          "topic_id": "MHW-02",
+          "topic_name": "Microbes in industrial products"
+        },
+        {
+          "topic_id": "MHW-03",
+          "topic_name": "Industrial fermentation"
+        },
+        {
+          "topic_id": "MHW-04",
+          "topic_name": "Antibiotics"
+        },
+        {
+          "topic_id": "MHW-05",
+          "topic_name": "Sewage treatment"
+        },
+        {
+          "topic_id": "MHW-06",
+          "topic_name": "Anaerobic digestion and biogas"
+        },
+        {
+          "topic_id": "MHW-07",
+          "topic_name": "Biocontrol agents"
+        },
+        {
+          "topic_id": "MHW-08",
+          "topic_name": "Biofertilisers"
+        },
+        {
+          "topic_id": "MHW-09",
+          "topic_name": "Microbes in agriculture"
+        }
+      ]
+    },
+    {
+      "class_level": "12",
+      "chapter_id": "BPP",
+      "chapter_name": "Biotechnology: Principles and Processes",
+      "topics": [
+        {
+          "topic_id": "BPP-01",
+          "topic_name": "Principles of biotechnology"
+        },
+        {
+          "topic_id": "BPP-02",
+          "topic_name": "Biotechnology tools"
+        },
+        {
+          "topic_id": "BPP-03",
+          "topic_name": "Restriction enzymes"
+        },
+        {
+          "topic_id": "BPP-04",
+          "topic_name": "Cloning vectors"
+        },
+        {
+          "topic_id": "BPP-05",
+          "topic_name": "Competent host cells"
+        },
+        {
+          "topic_id": "BPP-06",
+          "topic_name": "Recombinant DNA technology"
+        },
+        {
+          "topic_id": "BPP-07",
+          "topic_name": "Polymerase chain reaction"
+        },
+        {
+          "topic_id": "BPP-08",
+          "topic_name": "Gel electrophoresis"
+        },
+        {
+          "topic_id": "BPP-09",
+          "topic_name": "Introduction of recombinant DNA"
+        },
+        {
+          "topic_id": "BPP-10",
+          "topic_name": "Bioreactors"
+        },
+        {
+          "topic_id": "BPP-11",
+          "topic_name": "Downstream processing"
+        }
+      ]
+    },
+    {
+      "class_level": "12",
+      "chapter_id": "BTA",
+      "chapter_name": "Biotechnology and Its Applications",
+      "topics": [
+        {
+          "topic_id": "BTA-01",
+          "topic_name": "Agricultural applications"
+        },
+        {
+          "topic_id": "BTA-02",
+          "topic_name": "Bt crops"
+        },
+        {
+          "topic_id": "BTA-03",
+          "topic_name": "RNA interference"
+        },
+        {
+          "topic_id": "BTA-04",
+          "topic_name": "Medical applications"
+        },
+        {
+          "topic_id": "BTA-05",
+          "topic_name": "Genetically engineered insulin"
+        },
+        {
+          "topic_id": "BTA-06",
+          "topic_name": "Gene therapy"
+        },
+        {
+          "topic_id": "BTA-07",
+          "topic_name": "Molecular diagnosis"
+        },
+        {
+          "topic_id": "BTA-08",
+          "topic_name": "Transgenic animals"
+        },
+        {
+          "topic_id": "BTA-09",
+          "topic_name": "Biotechnology ethics"
+        }
+      ]
+    },
+    {
+      "class_level": "12",
+      "chapter_id": "OAP",
+      "chapter_name": "Organisms and Populations",
+      "topics": [
+        {
+          "topic_id": "OAP-01",
+          "topic_name": "Organisms and environment"
+        },
+        {
+          "topic_id": "OAP-02",
+          "topic_name": "Responses to temperature"
+        },
+        {
+          "topic_id": "OAP-03",
+          "topic_name": "Adaptations"
+        },
+        {
+          "topic_id": "OAP-04",
+          "topic_name": "Population attributes"
+        },
+        {
+          "topic_id": "OAP-05",
+          "topic_name": "Population growth"
+        },
+        {
+          "topic_id": "OAP-06",
+          "topic_name": "Population interactions"
+        },
+        {
+          "topic_id": "OAP-07",
+          "topic_name": "Population regulation"
+        },
+        {
+          "topic_id": "OAP-08",
+          "topic_name": "Population characteristics"
+        }
+      ]
+    },
+    {
+      "class_level": "11",
+      "chapter_id": "TLW",
+      "chapter_name": "The Living World",
+      "topics": [
+        {
+          "topic_id": "TLW-01",
+          "topic_name": "What is living?"
+        },
+        {
+          "topic_id": "TLW-02",
+          "topic_name": "Biodiversity"
+        },
+        {
+          "topic_id": "TLW-03",
+          "topic_name": "Taxonomy"
+        },
+        {
+          "topic_id": "TLW-04",
+          "topic_name": "Systematics"
+        },
+        {
+          "topic_id": "TLW-05",
+          "topic_name": "Binomial nomenclature"
+        },
+        {
+          "topic_id": "TLW-06",
+          "topic_name": "Taxonomic hierarchy"
+        },
+        {
+          "topic_id": "TLW-07",
+          "topic_name": "Taxonomic aids"
+        }
+      ]
+    },
+    {
+      "class_level": "11",
+      "chapter_id": "BC",
+      "chapter_name": "Biological Classification",
+      "topics": [
+        {
+          "topic_id": "BC-01",
+          "topic_name": "Five-kingdom classification"
+        },
+        {
+          "topic_id": "BC-02",
+          "topic_name": "Kingdom Monera"
+        },
+        {
+          "topic_id": "BC-03",
+          "topic_name": "Bacteria"
+        },
+        {
+          "topic_id": "BC-04",
+          "topic_name": "Kingdom Protista"
+        },
+        {
+          "topic_id": "BC-05",
+          "topic_name": "Kingdom Fungi"
+        },
+        {
+          "topic_id": "BC-06",
+          "topic_name": "Fungal reproduction"
+        },
+        {
+          "topic_id": "BC-07",
+          "topic_name": "Lichens"
+        },
+        {
+          "topic_id": "BC-08",
+          "topic_name": "Viruses"
+        },
+        {
+          "topic_id": "BC-09",
+          "topic_name": "Viroids and prions"
+        },
+        {
+          "topic_id": "BC-10",
+          "topic_name": "Principles of classification"
+        }
+      ]
+    },
+    {
+      "class_level": "11",
+      "chapter_id": "PK",
+      "chapter_name": "Plant Kingdom",
+      "topics": [
+        {
+          "topic_id": "PK-01",
+          "topic_name": "Algae"
+        },
+        {
+          "topic_id": "PK-02",
+          "topic_name": "Algal reproduction"
+        },
+        {
+          "topic_id": "PK-03",
+          "topic_name": "Economic importance of algae"
+        },
+        {
+          "topic_id": "PK-04",
+          "topic_name": "Bryophytes"
+        },
+        {
+          "topic_id": "PK-05",
+          "topic_name": "Bryophyte reproduction"
+        },
+        {
+          "topic_id": "PK-06",
+          "topic_name": "Pteridophytes"
+        },
+        {
+          "topic_id": "PK-07",
+          "topic_name": "Pteridophyte life cycle"
+        },
+        {
+          "topic_id": "PK-08",
+          "topic_name": "Gymnosperms"
+        },
+        {
+          "topic_id": "PK-09",
+          "topic_name": "Gymnosperm reproduction"
+        },
+        {
+          "topic_id": "PK-10",
+          "topic_name": "Angiosperms"
+        },
+        {
+          "topic_id": "PK-11",
+          "topic_name": "Plant life cycles"
+        },
+        {
+          "topic_id": "PK-12",
+          "topic_name": "Alternation of generations"
+        }
+      ]
+    },
+    {
+      "class_level": "11",
+      "chapter_id": "MFP",
+      "chapter_name": "Morphology of Flowering Plants",
+      "topics": [
+        {
+          "topic_id": "MFP-01",
+          "topic_name": "Root"
+        },
+        {
+          "topic_id": "MFP-02",
+          "topic_name": "Stem"
+        },
+        {
+          "topic_id": "MFP-03",
+          "topic_name": "Leaf"
+        },
+        {
+          "topic_id": "MFP-04",
+          "topic_name": "Inflorescence"
+        },
+        {
+          "topic_id": "MFP-05",
+          "topic_name": "Flower"
+        },
+        {
+          "topic_id": "MFP-06",
+          "topic_name": "Aestivation"
+        },
+        {
+          "topic_id": "MFP-07",
+          "topic_name": "Androecium"
+        },
+        {
+          "topic_id": "MFP-08",
+          "topic_name": "Gynoecium"
+        },
+        {
+          "topic_id": "MFP-09",
+          "topic_name": "Fruit"
+        },
+        {
+          "topic_id": "MFP-10",
+          "topic_name": "Seed"
+        },
+        {
+          "topic_id": "MFP-11",
+          "topic_name": "Floral formula"
+        },
+        {
+          "topic_id": "MFP-12",
+          "topic_name": "Fabaceae, Solanaceae and Liliaceae"
+        }
+      ]
+    },
+    {
+      "class_level": "11",
+      "chapter_id": "AFP",
+      "chapter_name": "Anatomy of Flowering Plants",
+      "topics": [
+        {
+          "topic_id": "AFP-01",
+          "topic_name": "Plant tissues"
+        },
+        {
+          "topic_id": "AFP-02",
+          "topic_name": "Meristematic tissues"
+        },
+        {
+          "topic_id": "AFP-03",
+          "topic_name": "Simple permanent tissues"
+        },
+        {
+          "topic_id": "AFP-04",
+          "topic_name": "Complex permanent tissues"
+        },
+        {
+          "topic_id": "AFP-05",
+          "topic_name": "Tissue systems"
+        },
+        {
+          "topic_id": "AFP-06",
+          "topic_name": "Dicot root anatomy"
+        },
+        {
+          "topic_id": "AFP-07",
+          "topic_name": "Monocot root anatomy"
+        },
+        {
+          "topic_id": "AFP-08",
+          "topic_name": "Dicot stem anatomy"
+        },
+        {
+          "topic_id": "AFP-09",
+          "topic_name": "Monocot stem anatomy"
+        },
+        {
+          "topic_id": "AFP-10",
+          "topic_name": "Leaf anatomy"
+        },
+        {
+          "topic_id": "AFP-11",
+          "topic_name": "Secondary growth"
+        },
+        {
+          "topic_id": "AFP-12",
+          "topic_name": "Wood anatomy"
+        }
+      ]
+    },
+    {
+      "class_level": "11",
+      "chapter_id": "SOA",
+      "chapter_name": "Structural Organisation in Animals",
+      "topics": [
+        {
+          "topic_id": "SOA-01",
+          "topic_name": "Animal tissues"
+        },
+        {
+          "topic_id": "SOA-02",
+          "topic_name": "Epithelial tissue"
+        },
+        {
+          "topic_id": "SOA-03",
+          "topic_name": "Connective tissue"
+        },
+        {
+          "topic_id": "SOA-04",
+          "topic_name": "Muscular tissue"
+        },
+        {
+          "topic_id": "SOA-05",
+          "topic_name": "Neural tissue"
+        },
+        {
+          "topic_id": "SOA-06",
+          "topic_name": "Earthworm"
+        },
+        {
+          "topic_id": "SOA-07",
+          "topic_name": "Cockroach"
+        },
+        {
+          "topic_id": "SOA-08",
+          "topic_name": "Levels of animal organisation"
+        }
+      ]
+    },
+    {
+      "class_level": "11",
+      "chapter_id": "CUL",
+      "chapter_name": "Cell: The Unit of Life",
+      "topics": [
+        {
+          "topic_id": "CUL-01",
+          "topic_name": "Cell theory"
+        },
+        {
+          "topic_id": "CUL-02",
+          "topic_name": "Prokaryotic cells"
+        },
+        {
+          "topic_id": "CUL-03",
+          "topic_name": "Eukaryotic cells"
+        },
+        {
+          "topic_id": "CUL-04",
+          "topic_name": "Plasma membrane"
+        },
+        {
+          "topic_id": "CUL-05",
+          "topic_name": "Cell wall"
+        },
+        {
+          "topic_id": "CUL-06",
+          "topic_name": "Nucleus"
+        },
+        {
+          "topic_id": "CUL-07",
+          "topic_name": "Endomembrane system"
+        },
+        {
+          "topic_id": "CUL-08",
+          "topic_name": "Mitochondria"
+        },
+        {
+          "topic_id": "CUL-09",
+          "topic_name": "Plastids"
+        },
+        {
+          "topic_id": "CUL-10",
+          "topic_name": "Ribosomes"
+        },
+        {
+          "topic_id": "CUL-11",
+          "topic_name": "Cytoskeleton"
+        },
+        {
+          "topic_id": "CUL-12",
+          "topic_name": "Cilia and flagella"
+        },
+        {
+          "topic_id": "CUL-13",
+          "topic_name": "Centrosome and centrioles"
+        },
+        {
+          "topic_id": "CUL-14",
+          "topic_name": "Microbodies"
+        }
+      ]
+    },
+    {
+      "class_level": "11",
+      "chapter_id": "BM",
+      "chapter_name": "Biomolecules",
+      "topics": [
+        {
+          "topic_id": "BM-01",
+          "topic_name": "Chemical composition of living organisms"
+        },
+        {
+          "topic_id": "BM-02",
+          "topic_name": "Biomacromolecules"
+        },
+        {
+          "topic_id": "BM-03",
+          "topic_name": "Carbohydrates"
+        },
+        {
+          "topic_id": "BM-04",
+          "topic_name": "Proteins"
+        },
+        {
+          "topic_id": "BM-05",
+          "topic_name": "Lipids"
+        },
+        {
+          "topic_id": "BM-06",
+          "topic_name": "Nucleic acids"
+        },
+        {
+          "topic_id": "BM-07",
+          "topic_name": "Chemical bonds"
+        },
+        {
+          "topic_id": "BM-08",
+          "topic_name": "Metabolism"
+        },
+        {
+          "topic_id": "BM-09",
+          "topic_name": "Enzymes"
+        },
+        {
+          "topic_id": "BM-10",
+          "topic_name": "Factors affecting enzyme activity"
+        },
+        {
+          "topic_id": "BM-11",
+          "topic_name": "Enzyme inhibition"
+        }
+      ]
+    },
+    {
+      "class_level": "11",
+      "chapter_id": "CCD",
+      "chapter_name": "Cell Cycle and Cell Division",
+      "topics": [
+        {
+          "topic_id": "CCD-01",
+          "topic_name": "Cell cycle overview"
+        },
+        {
+          "topic_id": "CCD-02",
+          "topic_name": "Interphase"
+        },
+        {
+          "topic_id": "CCD-03",
+          "topic_name": "Mitosis"
+        },
+        {
+          "topic_id": "CCD-04",
+          "topic_name": "Cytokinesis"
+        },
+        {
+          "topic_id": "CCD-05",
+          "topic_name": "Significance of mitosis"
+        },
+        {
+          "topic_id": "CCD-06",
+          "topic_name": "Meiosis"
+        },
+        {
+          "topic_id": "CCD-07",
+          "topic_name": "Prophase I"
+        },
+        {
+          "topic_id": "CCD-08",
+          "topic_name": "Meiosis I"
+        },
+        {
+          "topic_id": "CCD-09",
+          "topic_name": "Meiosis II"
+        },
+        {
+          "topic_id": "CCD-10",
+          "topic_name": "Significance of meiosis"
+        },
+        {
+          "topic_id": "CCD-11",
+          "topic_name": "Mitosis versus meiosis"
+        }
+      ]
+    },
+    {
+      "class_level": "11",
+      "chapter_id": "PHP",
+      "chapter_name": "Photosynthesis in Higher Plants",
+      "topics": [
+        {
+          "topic_id": "PHP-01",
+          "topic_name": "Photosynthesis overview"
+        },
+        {
+          "topic_id": "PHP-02",
+          "topic_name": "Chloroplast structure"
+        },
+        {
+          "topic_id": "PHP-03",
+          "topic_name": "Photosynthetic pigments"
+        },
+        {
+          "topic_id": "PHP-04",
+          "topic_name": "Light reaction"
+        },
+        {
+          "topic_id": "PHP-05",
+          "topic_name": "Electron transport"
+        },
+        {
+          "topic_id": "PHP-06",
+          "topic_name": "ATP and NADPH formation"
+        },
+        {
+          "topic_id": "PHP-07",
+          "topic_name": "Calvin cycle"
+        },
+        {
+          "topic_id": "PHP-08",
+          "topic_name": "C4 pathway"
+        },
+        {
+          "topic_id": "PHP-09",
+          "topic_name": "Photorespiration"
+        },
+        {
+          "topic_id": "PHP-10",
+          "topic_name": "Factors affecting photosynthesis"
+        },
+        {
+          "topic_id": "PHP-11",
+          "topic_name": "Comparative pathways"
+        }
+      ]
+    },
+    {
+      "class_level": "11",
+      "chapter_id": "RIP",
+      "chapter_name": "Respiration in Plants",
+      "topics": [
+        {
+          "topic_id": "RIP-01",
+          "topic_name": "Respiration overview"
+        },
+        {
+          "topic_id": "RIP-02",
+          "topic_name": "Glycolysis"
+        },
+        {
+          "topic_id": "RIP-03",
+          "topic_name": "Fermentation"
+        },
+        {
+          "topic_id": "RIP-04",
+          "topic_name": "Aerobic respiration"
+        },
+        {
+          "topic_id": "RIP-05",
+          "topic_name": "Krebs cycle"
+        },
+        {
+          "topic_id": "RIP-06",
+          "topic_name": "Electron transport system"
+        },
+        {
+          "topic_id": "RIP-07",
+          "topic_name": "Oxidative phosphorylation"
+        },
+        {
+          "topic_id": "RIP-08",
+          "topic_name": "Respiratory balance sheet"
+        },
+        {
+          "topic_id": "RIP-09",
+          "topic_name": "Amphibolic pathway"
+        },
+        {
+          "topic_id": "RIP-10",
+          "topic_name": "Respiratory quotient"
+        },
+        {
+          "topic_id": "RIP-11",
+          "topic_name": "Aerobic versus anaerobic respiration"
+        }
+      ]
+    },
+    {
+      "class_level": "11",
+      "chapter_id": "PGD",
+      "chapter_name": "Plant Growth and Development",
+      "topics": [
+        {
+          "topic_id": "PGD-01",
+          "topic_name": "Plant growth"
+        },
+        {
+          "topic_id": "PGD-02",
+          "topic_name": "Phases of growth"
+        },
+        {
+          "topic_id": "PGD-03",
+          "topic_name": "Growth measurement"
+        },
+        {
+          "topic_id": "PGD-04",
+          "topic_name": "Differentiation and development"
+        },
+        {
+          "topic_id": "PGD-05",
+          "topic_name": "Plant growth regulators"
+        },
+        {
+          "topic_id": "PGD-06",
+          "topic_name": "Auxins"
+        },
+        {
+          "topic_id": "PGD-07",
+          "topic_name": "Gibberellins"
+        },
+        {
+          "topic_id": "PGD-08",
+          "topic_name": "Cytokinins"
+        },
+        {
+          "topic_id": "PGD-09",
+          "topic_name": "Ethylene"
+        },
+        {
+          "topic_id": "PGD-10",
+          "topic_name": "Abscisic acid"
+        },
+        {
+          "topic_id": "PGD-11",
+          "topic_name": "Photoperiodism"
+        },
+        {
+          "topic_id": "PGD-12",
+          "topic_name": "Vernalisation"
+        }
+      ]
+    },
+    {
+      "class_level": "11",
+      "chapter_id": "BEG",
+      "chapter_name": "Breathing and Exchange of Gases",
+      "topics": [
+        {
+          "topic_id": "BEG-01",
+          "topic_name": "Respiratory system overview"
+        },
+        {
+          "topic_id": "BEG-02",
+          "topic_name": "Human respiratory organs"
+        },
+        {
+          "topic_id": "BEG-03",
+          "topic_name": "Mechanism of breathing"
+        },
+        {
+          "topic_id": "BEG-04",
+          "topic_name": "Respiratory volumes"
+        },
+        {
+          "topic_id": "BEG-05",
+          "topic_name": "Respiratory capacities"
+        },
+        {
+          "topic_id": "BEG-06",
+          "topic_name": "Exchange of gases"
+        },
+        {
+          "topic_id": "BEG-07",
+          "topic_name": "Transport of oxygen"
+        },
+        {
+          "topic_id": "BEG-08",
+          "topic_name": "Transport of carbon dioxide"
+        },
+        {
+          "topic_id": "BEG-09",
+          "topic_name": "Regulation of respiration"
+        },
+        {
+          "topic_id": "BEG-10",
+          "topic_name": "Respiratory disorders"
+        }
+      ]
+    },
+    {
+      "class_level": "11",
+      "chapter_id": "BFC",
+      "chapter_name": "Body Fluids and Circulation",
+      "topics": [
+        {
+          "topic_id": "BFC-01",
+          "topic_name": "Blood"
+        },
+        {
+          "topic_id": "BFC-02",
+          "topic_name": "Plasma"
+        },
+        {
+          "topic_id": "BFC-03",
+          "topic_name": "Red blood cells"
+        },
+        {
+          "topic_id": "BFC-04",
+          "topic_name": "White blood cells"
+        },
+        {
+          "topic_id": "BFC-05",
+          "topic_name": "Blood coagulation"
+        },
+        {
+          "topic_id": "BFC-06",
+          "topic_name": "Blood groups"
+        },
+        {
+          "topic_id": "BFC-07",
+          "topic_name": "Lymph"
+        },
+        {
+          "topic_id": "BFC-08",
+          "topic_name": "Human heart"
+        },
+        {
+          "topic_id": "BFC-09",
+          "topic_name": "Cardiac cycle"
+        },
+        {
+          "topic_id": "BFC-10",
+          "topic_name": "Cardiac output"
+        },
+        {
+          "topic_id": "BFC-11",
+          "topic_name": "Electrocardiogram"
+        },
+        {
+          "topic_id": "BFC-12",
+          "topic_name": "Double circulation"
+        },
+        {
+          "topic_id": "BFC-13",
+          "topic_name": "Circulatory disorders"
+        }
+      ]
+    },
+    {
+      "class_level": "11",
+      "chapter_id": "EPE",
+      "chapter_name": "Excretory Products and Their Elimination",
+      "topics": [
+        {
+          "topic_id": "EPE-01",
+          "topic_name": "Excretion overview"
+        },
+        {
+          "topic_id": "EPE-02",
+          "topic_name": "Human excretory system"
+        },
+        {
+          "topic_id": "EPE-03",
+          "topic_name": "Kidney structure"
+        },
+        {
+          "topic_id": "EPE-04",
+          "topic_name": "Nephron"
+        },
+        {
+          "topic_id": "EPE-05",
+          "topic_name": "Urine formation"
+        },
+        {
+          "topic_id": "EPE-06",
+          "topic_name": "Urine concentration"
+        },
+        {
+          "topic_id": "EPE-07",
+          "topic_name": "Renal regulation"
+        },
+        {
+          "topic_id": "EPE-08",
+          "topic_name": "Other excretory functions"
+        },
+        {
+          "topic_id": "EPE-09",
+          "topic_name": "Renal disorders"
+        },
+        {
+          "topic_id": "EPE-10",
+          "topic_name": "Artificial kidney and dialysis"
+        }
+      ]
+    },
+    {
+      "class_level": "11",
+      "chapter_id": "LOM",
+      "chapter_name": "Locomotion and Movement",
+      "topics": [
+        {
+          "topic_id": "LOM-01",
+          "topic_name": "Types of movement"
+        },
+        {
+          "topic_id": "LOM-02",
+          "topic_name": "Human skeleton"
+        },
+        {
+          "topic_id": "LOM-03",
+          "topic_name": "Axial skeleton"
+        },
+        {
+          "topic_id": "LOM-04",
+          "topic_name": "Appendicular skeleton"
+        },
+        {
+          "topic_id": "LOM-05",
+          "topic_name": "Joints"
+        },
+        {
+          "topic_id": "LOM-06",
+          "topic_name": "Synovial joints"
+        },
+        {
+          "topic_id": "LOM-07",
+          "topic_name": "Skeletal muscle"
+        },
+        {
+          "topic_id": "LOM-08",
+          "topic_name": "Sarcomere"
+        },
+        {
+          "topic_id": "LOM-09",
+          "topic_name": "Muscle contraction"
+        },
+        {
+          "topic_id": "LOM-10",
+          "topic_name": "Muscle proteins"
+        },
+        {
+          "topic_id": "LOM-11",
+          "topic_name": "Muscular and skeletal disorders"
+        }
+      ]
+    },
+    {
+      "class_level": "11",
+      "chapter_id": "NCC",
+      "chapter_name": "Neural Control and Coordination",
+      "topics": [
+        {
+          "topic_id": "NCC-01",
+          "topic_name": "Nervous system overview"
+        },
+        {
+          "topic_id": "NCC-02",
+          "topic_name": "Neuron"
+        },
+        {
+          "topic_id": "NCC-03",
+          "topic_name": "Nerve fibres"
+        },
+        {
+          "topic_id": "NCC-04",
+          "topic_name": "Nerve impulse"
+        },
+        {
+          "topic_id": "NCC-05",
+          "topic_name": "Nerve impulse conduction"
+        },
+        {
+          "topic_id": "NCC-06",
+          "topic_name": "Synapse"
+        },
+        {
+          "topic_id": "NCC-07",
+          "topic_name": "Human brain"
+        },
+        {
+          "topic_id": "NCC-08",
+          "topic_name": "Forebrain"
+        },
+        {
+          "topic_id": "NCC-09",
+          "topic_name": "Midbrain"
+        },
+        {
+          "topic_id": "NCC-10",
+          "topic_name": "Hindbrain"
+        },
+        {
+          "topic_id": "NCC-11",
+          "topic_name": "Brain protection"
+        },
+        {
+          "topic_id": "NCC-12",
+          "topic_name": "Spinal cord"
+        },
+        {
+          "topic_id": "NCC-13",
+          "topic_name": "Reflex action"
+        },
+        {
+          "topic_id": "NCC-14",
+          "topic_name": "Autonomic nervous system"
+        }
+      ]
+    },
+    {
+      "class_level": "11",
+      "chapter_id": "CCI",
+      "chapter_name": "Chemical Coordination and Integration",
+      "topics": [
+        {
+          "topic_id": "CCI-01",
+          "topic_name": "Endocrine system"
+        },
+        {
+          "topic_id": "CCI-02",
+          "topic_name": "Hypothalamus"
+        },
+        {
+          "topic_id": "CCI-03",
+          "topic_name": "Pituitary gland"
+        },
+        {
+          "topic_id": "CCI-04",
+          "topic_name": "Pineal gland"
+        },
+        {
+          "topic_id": "CCI-05",
+          "topic_name": "Thyroid gland"
+        },
+        {
+          "topic_id": "CCI-06",
+          "topic_name": "Parathyroid glands"
+        },
+        {
+          "topic_id": "CCI-07",
+          "topic_name": "Thymus"
+        },
+        {
+          "topic_id": "CCI-08",
+          "topic_name": "Adrenal glands"
+        },
+        {
+          "topic_id": "CCI-09",
+          "topic_name": "Pancreas"
+        },
+        {
+          "topic_id": "CCI-10",
+          "topic_name": "Gonads"
+        },
+        {
+          "topic_id": "CCI-11",
+          "topic_name": "Other endocrine organs"
+        },
+        {
+          "topic_id": "CCI-12",
+          "topic_name": "Hormone mechanism of action"
+        },
+        {
+          "topic_id": "CCI-13",
+          "topic_name": "Endocrine disorders"
+        }
+      ]
+    }
+  ]
+}
