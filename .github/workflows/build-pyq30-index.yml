@@ -43,16 +43,35 @@ jobs:
 
       - name: Extract PDFs from RAR archives
         run: |
-          set +e
+          set -euo pipefail
           for archive in .pyq30/source/*.rar; do
             name="$(basename "$archive" .rar)"
             mkdir -p ".pyq30/extracted/$name"
             7z x -y "-o.pyq30/extracted/$name" "$archive"
-            status=$?
-            echo "$name extraction_exit_code=$status"
           done
-          set -e
           find .pyq30/extracted -type f -iname '*.pdf' -print
+          count=$(find .pyq30/extracted -type f -iname '*.pdf' | wc -l)
+          echo "Extracted PDF count: $count"
+          test "$count" -ge 5
+
+      - name: Inspect PDF text structure for contents and chapter headings
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import fitz, re
+          for path in sorted(Path(".pyq30").rglob("*.pdf")):
+              doc = fitz.open(path)
+              print(f"\\n===== {path.name}: {len(doc)} pages =====")
+              shown = 0
+              for i, page in enumerate(doc):
+                  raw = page.get_text("text")
+                  if i < 2 or re.search(r"(?i)contents|index|chapter|diversity in living|plant kingdom|animal kingdom|cell the unit", raw):
+                      sample = " ".join(raw.split())[:1800]
+                      print(f"--- PAGE {i+1} ---\\n{sample}")
+                      shown += 1
+                      if shown >= 8: break
+              doc.close()
+          PY
 
       - name: Build heading-only index
         run: python tools/build_pyq30_index.py
