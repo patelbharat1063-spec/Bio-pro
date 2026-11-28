@@ -24,6 +24,11 @@ for path in pdfs:
         pix = page.get_pixmap(matrix=fitz.Matrix(2.2, 2.2), colorspace=fitz.csGRAY, alpha=False)
         img = Image.open(io.BytesIO(pix.tobytes("png")))
         data = pytesseract.image_to_data(img, config="--oem 1 --psm 6", output_type=pytesseract.Output.DICT)
+        if path == pdfs[0] and page_no == 3:
+            preview = pytesseract.image_to_string(img, config="--oem 1 --psm 6")
+            print("OCR_SAMPLE_PAGE_BEGIN")
+            print(preview[:5000])
+            print("OCR_SAMPLE_PAGE_END")
         words = []
         confidences = []
         for raw, conf in zip(data.get("text", []), data.get("conf", [])):
