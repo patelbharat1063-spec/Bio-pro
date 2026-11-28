@@ -15,7 +15,6 @@ concurrency:
 
 jobs:
   extract-index:
-    # Runs only on the selected branch; never pushes to the default branch automatically.
     if: github.ref != 'refs/heads/main'
     runs-on: ubuntu-24.04
     steps:
@@ -79,14 +78,17 @@ jobs:
       - name: Build heading-only index
         run: python tools/build_pyq30_index.py
 
-      - name: Commit generated chapter index on this feature branch
+      - name: Extract three-page MCQ pilot for manual review
+        run: python tools/extract_pyq30_sample.py
+
+      - name: Commit generated review artifacts on this feature branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/data/pyq30-index.json
+          git add public/data/pyq30-index.json public/data/pyq30-sample-review.json
           if git diff --cached --quiet; then
-            echo "No index changes."
+            echo "No review artifact changes."
           else
-            git commit -m "Build 30-year Biology PYQ chapter index"
+            git commit -m "Build PYQ OCR sample review artifact"
             git push origin "HEAD:${{ github.ref_name }}"
           fi
