@@ -1,0 +1,275 @@
+{
+  "schema_version": 1,
+  "purpose": "Review-only OCR pilot; not approved for app import",
+  "source_repository": "https://github.com/manjunath5496/30-Years-NEET-AIPMT-Chapterwise-Paper-and-Solution-Biology",
+  "pages_tested": [
+    {
+      "file": "91_m72.pdf",
+      "page": 1
+    },
+    {
+      "file": "271_m72.pdf",
+      "page": 3
+    },
+    {
+      "file": "361_m72.pdf",
+      "page": 10
+    }
+  ],
+  "records_detected": 23,
+  "records": [
+    {
+      "id": "1c919dedd7d10a612c67",
+      "source_file": "91_m72.pdf",
+      "source_page": 1,
+      "source_question_number": 84,
+      "ocr_text": "84. Which is correct pair for edible part? 94. A plant bears fruit, has a column of vascular (a) Tomato-thalamus tissue and a tap root system. This plant is a (b) Maize-cotyledons (a) angiosperm and dicot (c) Guava-mesocarp (b) gymnosperm and dicot (d) Date palm-mesocarp (2001) (c) angiosperm and monocot",
+      "detected_option_labels": 7,
+      "status": "needs_manual_review",
+      "topic_id": null,
+      "answer": null
+    },
+    {
+      "id": "de2ecc9632228b365e3b",
+      "source_file": "91_m72.pdf",
+      "source_page": 1,
+      "source_question_number": 85,
+      "ocr_text": "85. Which is expressing right appropriate pairing? (d) gymnosperm and monocot. (1994) (a) Brassicaceae - sunflower 95. Hypanthodium is a specialized type of (b) Malvaceae - cotton (a) fruit (b) inflorescence (c) Papilionaceae - catechu (c) thalamus (d) ovary. (d) Liliaceae - wheat (2000) (1994)",
+      "detected_option_labels": 9,
+      "status": "needs_manual_review",
+      "topic_id": null,
+      "answer": null
+    },
+    {
+      "id": "f45acb9288b194290114",
+      "source_file": "91_m72.pdf",
+      "source_page": 1,
+      "source_question_number": 86,
+      "ocr_text": "86. Pneumatophores are found in 96. Pulses are obtained from (a) the vegetation which is found in marshy (a) Fabaceae (b), Asteraceae and saline lake (c) Poaceae (d), Solanaceae. (b) the vegetation which found in acidic soil (1993) S a (2000 97. Epipetalous stamens with free filaments and EINE: 4 fused anthers occur in",
+      "detected_option_labels": 4,
+      "status": "needs_manual_review",
+      "topic_id": null,
+      "answer": null
+    },
+    {
+      "id": "4131ed61931085f2bda7",
+      "source_file": "91_m72.pdf",
+      "source_page": 1,
+      "source_question_number": 87,
+      "ocr_text": "87. Hair found in the inflorescence of Zea mays (a) Asteraceae (b) Solanaceae are the modification of (c) Liliacéae (d) Poaceae. (a) style (b) stigma (1992) (c) spathe (a) filaments; (200¢) 98. Floral formula of tomato/tobacco is",
+      "detected_option_labels": 8,
+      "status": "needs_manual_review",
+      "topic_id": null,
+      "answer": null
+    },
+    {
+      "id": "0dc2e1aa0e8aa93fd4ed",
+      "source_file": "91_m72.pdf",
+      "source_page": 1,
+      "source_question_number": 88,
+      "ocr_text": "88. Geocarpic fruits is ’ (a) carrot (b) radish | (a) g Ky sAwGa, — (b) og Ky yA, ,G, : om (c) ground nut | (d) turnip. (2000) | (c) ag P.A,G, (d) of KC uA. Gey.",
+      "detected_option_labels": 8,
+      "status": "needs_manual_review",
+      "topic_id": null,
+      "answer": null
+    },
+    {
+      "id": "ffc7b0d83b721b0b0144",
+      "source_file": "91_m72.pdf",
+      "source_page": 1,
+      "source_question_number": 89,
+      "ocr_text": "89. Angiosperm, to which the largest flowers | belong, is (1992, 1989) (a) total root parasite 99. Botanical name of cauliflower is (b) partial root parasite (a) Brassica oleracea var. capitata (c) total stem parasite (b) Brassica compesteris (d) partial stem parasite, (1999) (c) Brassica oleracea var. botrytis",
+      "detected_option_labels": 7,
+      "status": "needs_manual_review",
+      "topic_id": null,
+      "answer": null
+    },
+    {
+      "id": "d347caeeb62586dd2248",
+      "source_file": "91_m72.pdf",
+      "source_page": 1,
+      "source_question_number": 90,
+      "ocr_text": "90. The plant, which bears ¢linging roots, is (d) Brassica oleracea var. gemmifera. (a) screw pine (b) Podostemon se (1991) (c) Trapa (d) orchid. 100. og Ks CsA G2) is floral formula of cae Lili b) Sol",
+      "detected_option_labels": 6,
+      "status": "needs_manual_review",
+      "topic_id": null,
+      "answer": null
+    },
+    {
+      "id": "17489fc4ce19ec7ebf7d",
+      "source_file": "91_m72.pdf",
+      "source_page": 1,
+      "source_question_number": 91,
+      "ocr_text": "91. Floral featuresareichiefly used in angiosperms ey Lee A) wpOMnnene ; - radial (c) Asteraceae (d) Fabaceae. identificatiom, because (1991) (a) flowers)can be safely pressed } (b) reproductive parts are more stable and | 101. Epipetalous and syngenesious stamens occur conservative than vegetative parts in (c) flowers are nice to work with (a) Solanaceae (b) Brassicaceae (d) flowers are of various colours. (1998) (c) Fabaceae (d) Asteraceae.",
+      "detected_option_labels": 11,
+      "status": "needs_manual_review",
+      "topic_id": null,
+      "answer": null
+    },
+    {
+      "id": "41ddfde30edfbdfaa9fc",
+      "source_file": "91_m72.pdf",
+      "source_page": 1,
+      "source_question_number": 92,
+      "ocr_text": "92. Which plant will lose its economic value, if (1991) its fruits are produced by induced 102. Fruit of Mangifera indica is parthenocarpy? (a). bei 6) ‘drupe (a) Orange (b) Banana — va d) ci (1991 (c) Grape (d) Pomegranate xe); SEDSuIE Aa) BiG. ) (1997) | 103. A family delimited by type of inflorescence is",
+      "detected_option_labels": 5,
+      "status": "needs_manual_review",
+      "topic_id": null,
+      "answer": null
+    },
+    {
+      "id": "fdf11127bd670803e420",
+      "source_file": "91_m72.pdf",
+      "source_page": 1,
+      "source_question_number": 93,
+      "ocr_text": "93. Which of the following is a ‘true fruit’? (a) Fabaceae (b) Asteraceae (a) Banana (b) Fig (c) Solanaceae (d) Liliaceae. (c) Apple (d) Pear (1996) (1991) https://t.me/Estore33_com",
+      "detected_option_labels": 8,
+      "status": "needs_manual_review",
+      "topic_id": null,
+      "answer": null
+    },
+    {
+      "id": "febfe034fd6a9f72a466",
+      "source_file": "271_m72.pdf",
+      "source_page": 3,
+      "source_question_number": 42,
+      "ocr_text": "42. Which one of the following hormones is | 51. Melatonin is secreted by modified amino acid? (a) pineal body (b) skin (a) Epinephrine (b) Progesterone (c) pituitary gland (d) thyroid. (2000) (c) Prostaglandin (d) Estrogen (2004) §2. Which gland secretes odorous secretion in",
+      "detected_option_labels": 8,
+      "status": "needs_manual_review",
+      "topic_id": null,
+      "answer": null
+    },
+    {
+      "id": "f6009c1fe052526136e3",
+      "source_file": "271_m72.pdf",
+      "source_page": 3,
+      "source_question_number": 43,
+      "ocr_text": "43. Which one of the following pairs correctly mammals? matches a hormone witha disease resulting from (a) Bartholins (by Prostate its deficiency? (c) Anal gland (d))Liver (2000) (a) Luteinizing - Failure of hormone ovulation 53. MSH is secreted by (b) Insulin - Diabetes insipidus (a) anterior lobe of pituitary (c) Thyroxine - Tetany (b) middle lobe of pituitary (d) Parathyroid - Diabetes mellitus (c) posterior lobe of,pituitary hormone (2004) (d) endostyle, (2000) 44, Chemically hormones are ‘ _ (a) biogenic amines only 54. Choleeystokinin and duocrinin are secreted by (b) proteins, steroids and biogenic amines (a) adrenal cortex (b) thyroid gland (c) proteins only (c) intestine (d) pancreas. (d) steroids only. (2004) | (1999)",
+      "detected_option_labels": 18,
+      "status": "needs_manual_review",
+      "topic_id": null,
+      "answer": null
+    },
+    {
+      "id": "c58dd6dc265a2608b06a",
+      "source_file": "271_m72.pdf",
+      "source_page": 3,
+      "source_question_number": 45,
+      "ocr_text": "45. Which one of the following pairs correetly | 55. The function of oxytocin is to help in matches a hormone witha disease resulting from | (a) child birth (b) gametogenesis its deficiency ? (c) growth (d) lactation. (1999) (a) Relaxin — Gigantism . ; (b) Prolactin — Cretinism 56. Secretion of progesterone by corpus luteum is (c) Parathyroid hormone — Tetany initiated by (d) Insulin — Diabetes insipidus (2003) (a) testosterone (b) thyroxine",
+      "detected_option_labels": 10,
+      "status": "needs_manual_review",
+      "topic_id": null,
+      "answer": null
+    },
+    {
+      "id": "01f1f9114971d5a8bb06",
+      "source_file": "271_m72.pdf",
+      "source_page": 3,
+      "source_question_number": 46,
+      "ocr_text": "46. Acromegaly is caused by to MBH io) LE (gee) (a) excess of STH 57. The gonadotrophic hormones are secreted by (b) excess of thyroxine (a) anterior lobe of pituitary (c) deficiency of thyroxine (b) interstitial cells of testes (d) excess of adrenaline. (2002) (c) adrenal cortex 47, Adrenaline direetly affects on (d) posterior part of thyroid. (1999) (a) 950A. node 58. Diabetes is due to (b) (-cells of Langerhans (a) enzyme deficiency (c) dorsal root of spinal nerve are eee (d) epithelial cells of stomach (2002) ib) dog sie: Seticiency . , (c) Na™ deficiency",
+      "detected_option_labels": 14,
+      "status": "needs_manual_review",
+      "topic_id": null,
+      "answer": null
+    },
+    {
+      "id": "30f39e940a0463dc02f9",
+      "source_file": "271_m72.pdf",
+      "source_page": 3,
+      "source_question_number": 48,
+      "ocr_text": "48. When both ovaries are removed from rat then (d) hormonal deficiency. (1999) « : : 5 ogra 18 SRCRASEAD DIOS) 59. Calcitonin is a thyroid hormone which (b) Prolactin (a) elevates calcium level in blood (c) Estrogen (b) has no effect on calcium (d) Gonadotropin releasing factor (2002) (c) elevates potassium level in blood",
+      "detected_option_labels": 7,
+      "status": "needs_manual_review",
+      "topic_id": null,
+      "answer": null
+    },
+    {
+      "id": "3ecb2a4b569e4e502977",
+      "source_file": "271_m72.pdf",
+      "source_page": 3,
+      "source_question_number": 49,
+      "ocr_text": "49. Mainly which type of hormones control the a), somesnicalenm, level as Hiaes, Gee) menstrual cycle in human beings? 60. The hormone that stimulates the stomach to (a) FSH (b) LH secrete gastric juice is (c) FSH, LH, estrogen (a) enterokinase (b) enterogastrone (d) progesterone (2002) (c) gastrin (d) renin. (1998) https://t.me/Estore33_com",
+      "detected_option_labels": 8,
+      "status": "needs_manual_review",
+      "topic_id": null,
+      "answer": null
+    },
+    {
+      "id": "c289ab33a8b790670b4f",
+      "source_file": "361_m72.pdf",
+      "source_page": 10,
+      "source_question_number": 12,
+      "ocr_text": "12. Which of the following had the smallest brain (a) non-random evolution capacity? (b) adaptive radiation (a) Homo neanderthalensis (c) natural selection (b) Homo habilis (d) convergent evolution. (NEET 2013) (c) Homo erectus J ‘ fd) Hompsapiens (2015 Cancelled) 20. The eye of octopus and eye of cat show different patterns of structure, yet they perform similar",
+      "detected_option_labels": 7,
+      "status": "needs_manual_review",
+      "topic_id": null,
+      "answer": null
+    },
+    {
+      "id": "a355c5815a3d2a4e2d6c",
+      "source_file": "361_m72.pdf",
+      "source_page": 10,
+      "source_question_number": 13,
+      "ocr_text": "13. In a population of 1000 individuals 360 belong function. This is an example of to genotype AA, 480 to Aa and the remaining (a) analogous organs that have evolved due to 160 to aa. Based on this data, the frequency of convergent evolution. allele A in the population is (b) analogous organs that have evolved due to (a) 0.4 (b) 0.5 divergent evolution. (c) 0.6 (d) 0.7. (2014) (c) homologous organs that have»evolved due",
+      "detected_option_labels": 7,
+      "status": "needs_manual_review",
+      "topic_id": null,
+      "answer": null
+    },
+    {
+      "id": "b11fc88b002198750189",
+      "source_file": "361_m72.pdf",
+      "source_page": 10,
+      "source_question_number": 14,
+      "ocr_text": "14. Forelimbs of cat, lizard used in walking; forelimbs to convergent evolution. of whale used in swimming and forelimbs of bats (d) homologous organs that have evolved due used in flying are an example of to divergent evolution. (NEET 20/3) (a) analogous organs 21. Random aimidirectional change in allele (b) adaptive radiation frequeneies that oecurs by chance in all (c) homologous organs populations and especially in small populations (d) convergent evolution. (2014) is kuin",
+      "detected_option_labels": 5,
+      "status": "needs_manual_review",
+      "topic_id": null,
+      "answer": null
+    },
+    {
+      "id": "597adfbd5ee766a77d7b",
+      "source_file": "361_m72.pdf",
+      "source_page": 10,
+      "source_question_number": 15,
+      "ocr_text": "15. Which one of the following are analogous (a)) migration (b) natural selection structures? (c) genetic drift (d) mutation. (a) Wings of bat and wings of pigeon | (Karnataka NEET 2013) (b) Gills of prawn and lungs of man ; | 22. Genetic variation in a population arises due to (c) Thorns of Bougainvillea and tendrils of | (a) recombination only Cucurbita ; | (b) mutation as well as recombination (d) Flippers of dolphin and legs of horse »,, (c) reproductive isolation and selection gy) (d) mutations only.",
+      "detected_option_labels": 11,
+      "status": "needs_manual_review",
+      "topic_id": null,
+      "answer": null
+    },
+    {
+      "id": "f0f9f5a01b2d6354c1b9",
+      "source_file": "361_m72.pdf",
+      "source_page": 10,
+      "source_question_number": 16,
+      "ocr_text": "16. According to Darwin, the organio evolution is due (Karnataka NEET 2013) He - ae . 23. Dinosaurs dominated the world in which of the (a) competition within closely related species z a : . ; d : following geological eras? (b) reduced feeding efficiency in one species due (a) C : 5) iarastic to the presence of interfering species i ean eae ee ane 4 (c) Mesozoic (d) Devonian (c) intraspecific Competition K ka NEET 2013 (d) interspecifie competition. | (NEET 2013) (Karnataka ) ; . ; 24, The finch species of Galapagos islands are",
+      "detected_option_labels": 7,
+      "status": "needs_manual_review",
+      "topic_id": null,
+      "answer": null
+    },
+    {
+      "id": "31c5aa61083fd2cb1de8",
+      "source_file": "361_m72.pdf",
+      "source_page": 10,
+      "source_question_number": 17,
+      "ocr_text": "17. The tong AM 4 oe in BeneHE grouped according to their food sources. Which in ear fee cstuibed bY of the following is not a finch food? (2) “RR Stations . (a) Carrion (b) Insects (b) lack of random mating fc) ‘Tres buds (d) Seeds (c) random mating ; (d) lack of migration. (NEET 2013) . . (Karnataka NEET 2013) Si a ; 25. Evolution of different species in a given area",
+      "detected_option_labels": 6,
+      "status": "needs_manual_review",
+      "topic_id": null,
+      "answer": null
+    },
+    {
+      "id": "ec53dd2c8a93b33864e1",
+      "source_file": "361_m72.pdf",
+      "source_page": 10,
+      "source_question_number": 18,
+      "ocr_text": "18. Variation in gene frequencies within populations starting from a point and spreading to other can occur by chance rather than by natural geographical areas is known as selection. This is referred to as (a) adaptive radiation (a) random mating (b) genetic load (b) natural selection (c) genetic flow (d) genetic drift. (c) migration (NEET 2013) (d) divergent evolution. (2012) ee Breese by men ce van aa 26. Which one of the following options gives one evolutionary history evolve similar phenotypic : ; E ; correct example each of convergent evolution and adaptations in response to a common : : . . divergent evolution? environmental challenge, is called https://t.me/Estore33_com",
+      "detected_option_labels": 8,
+      "status": "needs_manual_review",
+      "topic_id": null,
+      "answer": null
+    }
+  ]
+}
