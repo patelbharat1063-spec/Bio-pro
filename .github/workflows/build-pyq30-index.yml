@@ -73,7 +73,7 @@ jobs:
               doc.close()
           PY
 
-      - name: Measure OCR readability on representative pages
+      - name: Measure OCR readability and inspect one representative page
         run: python tools/diagnose_pyq30_ocr.py
 
       - name: Build heading-only index
